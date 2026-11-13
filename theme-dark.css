@@ -1,0 +1,49 @@
+/* Blue Topaz — dark variant. Blue Topaz's rainbow heading ladder on a graphite
+   surface. Same --bt-* customization tokens as the light variant. */
+:root {
+  --bt-accent: #2d82cc;
+  --bt-accent-strong: #5aa7e8;
+  --bt-accent-soft: rgba(45, 130, 204, 0.17);
+  --bt-accent-softer: rgba(45, 130, 204, 0.09);
+  --bt-bg: rgba(21, 21, 21, 0.85);
+  --bt-bg-soft: #1b1b1b;
+  --bt-sidebar: #151515;
+  --bt-text: #c6c6c6;
+  --bt-muted: #8a8a8a;
+  --bt-border: #343434;
+
+  /* Blue Topaz's dark heading ladder */
+  --bt-h1: hsl(78, 62%, 47%);
+  --bt-h2: hsl(118, 42%, 49%);
+  --bt-h3: hsl(180, 53%, 48%);
+  --bt-h4: hsl(216, 69%, 68%);
+  --bt-h5: hsl(258, 79%, 77%);
+  --bt-h6: hsl(290, 85%, 81%);
+
+  --bt-code-bg: #101010;
+  --bt-code-border: #343434;
+  --bt-code-text: #d0d0d0;
+  --bt-inline-bg: #2b2b2b;
+  --bt-inline-color: #d58000;
+  --bt-quote-bg: rgba(45, 130, 204, 0.10);
+  --bt-quote-text: #a8b3bf;
+  --bt-table-head: rgba(45, 130, 204, 0.15);
+  --bt-table-stripe: #1d1d1d;
+  --bt-mark: #5c5a3a;
+  --bt-selection: rgba(45, 130, 204, 0.28);
+  --bt-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+  --bt-page-bg: rgba(21, 21, 21, 0.85);
+  --bt-page-bg-image: radial-gradient(1100px 460px at 50% -8%, rgba(45, 130, 204, 0.10), transparent 70%);
+  --bt-page-overlay: transparent;
+  --bt-sidebar-image: none;
+
+  --cm-keyword: #c792ea; --cm-number: #f78c6c; --cm-def: #82aaff; --cm-type: #ffcb6b;
+  --cm-property: #82aaff; --cm-operator: #89ddff; --cm-comment: #7b858f; --cm-string: #c3e88d;
+  --cm-string-2: #89ddff; --cm-meta: #ffcb6b; --cm-builtin: #82aaff; --cm-tag: #f07178;
+  --cm-attribute: #ffcb6b; --cm-header: #f07178;
+  color-scheme: dark;
+}
+
+/* Base pane behind the translucent --bt-bg layers: keep menus/modals solid and
+   let the editor show the same #151515 panel as the sidebar. */
+body.theme-dark { --ui-bg: #151515; }

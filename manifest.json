@@ -1,0 +1,15 @@
+{
+  "id": "blue-topaz",
+  "name": "蓝托帕石",
+  "nameEn": "Blue Topaz",
+  "version": "1.0.0",
+  "author": "Cuman (Morz adaptation), whyt-byte & PKMer community (upstream Blue Topaz)",
+  "description": "Blue Topaz 的 Morz 适配版：托帕蓝、蓝色标题阶梯（暗色绿→青→蓝→紫）、着色引言与圆角代码/表格卡片，明暗成对。",
+  "repo": "cumany/morz-bluetopaz",
+  "homepage": "https://github.com/cumany/morz-bluetopaz",
+  "modes": ["light", "dark"],
+  "light": "theme.css",
+  "dark": "theme-dark.css",
+  "export": "export.css",
+  "license": "MIT"
+}

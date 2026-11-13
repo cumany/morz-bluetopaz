@@ -1,0 +1,202 @@
+/* Blue Topaz export/print-only rules. Exported callouts use one <blockquote>
+   instead of the live editor's per-line cards. These rules never reach the
+   live editor, so their per-kind --bt-alert-color defaults cannot leak into
+   the adapted live stylesheet. */
+
+#write blockquote.md-alert {
+  background: color-mix(in srgb, var(--bt-alert-color, var(--bt-accent)) var(--bt-alert-tint), transparent);
+  border-left: 3px solid var(--bt-alert-color, var(--bt-accent));
+}
+/* 导出的标题色读 --md-alert-color（render/markdown 的内联样式），
+   所以每个类型同时把主题色写进这个变量，和底纹/边框保持一致。 */
+#write blockquote.md-alert-note { --bt-alert-color: var(--bt-alert-note); --md-alert-color: var(--bt-alert-note); }
+#write blockquote.md-alert-abstract { --bt-alert-color: var(--bt-alert-abstract); --md-alert-color: var(--bt-alert-abstract); }
+#write blockquote.md-alert-info { --bt-alert-color: var(--bt-alert-info); --md-alert-color: var(--bt-alert-info); }
+#write blockquote.md-alert-todo { --bt-alert-color: var(--bt-alert-todo); --md-alert-color: var(--bt-alert-todo); }
+#write blockquote.md-alert-tip { --bt-alert-color: var(--bt-alert-tip); --md-alert-color: var(--bt-alert-tip); }
+#write blockquote.md-alert-success { --bt-alert-color: var(--bt-alert-success); --md-alert-color: var(--bt-alert-success); }
+#write blockquote.md-alert-question { --bt-alert-color: var(--bt-alert-question); --md-alert-color: var(--bt-alert-question); }
+#write blockquote.md-alert-warning { --bt-alert-color: var(--bt-alert-warning); --md-alert-color: var(--bt-alert-warning); }
+#write blockquote.md-alert-failure { --bt-alert-color: var(--bt-alert-failure); --md-alert-color: var(--bt-alert-failure); }
+#write blockquote.md-alert-danger { --bt-alert-color: var(--bt-alert-danger); --md-alert-color: var(--bt-alert-danger); }
+#write blockquote.md-alert-bug { --bt-alert-color: var(--bt-alert-bug); --md-alert-color: var(--bt-alert-bug); }
+#write blockquote.md-alert-example { --bt-alert-color: var(--bt-alert-example); --md-alert-color: var(--bt-alert-example); }
+#write blockquote.md-alert-quote { --bt-alert-color: var(--bt-alert-quote); --md-alert-color: var(--bt-alert-quote); }
+#write blockquote.md-alert-important { --bt-alert-color: var(--bt-alert-important); --md-alert-color: var(--bt-alert-important); }
+#write blockquote.md-alert-caution { --bt-alert-color: var(--bt-alert-caution); --md-alert-color: var(--bt-alert-caution); }
+
+/* Style Settings carried into exported HTML/PDF. The export root gets the same
+   body classes/variables as the live editor; these selectors adapt them to the
+   rendered HTML structure (#write > p/h1/hr, blockquote.md-alert). */
+
+.morz-export.bt-heading-label #write > h1::before,
+.morz-export.bt-heading-label #write > h2::before {
+  display: inline-block; margin-right: .45em; padding: .06em .42em;
+  border-radius: 4px; font-family: var(--bt-ui-font); font-size: 10px;
+  font-weight: 700; letter-spacing: .03em; vertical-align: .55em;
+  color: var(--bt-accent-strong);
+  background: color-mix(in srgb, var(--bt-accent) 12%, transparent);
+}
+.morz-export.bt-heading-label #write > h1::before { content: "H1"; }
+.morz-export.bt-heading-label #write > h2::before { content: "H2"; }
+.morz-export.bt-heading-underline #write > h1,
+.morz-export.bt-heading-underline #write > h2 {
+  border-bottom: 1px solid color-mix(in srgb, var(--bt-accent) 42%, transparent);
+  padding-bottom: .12em;
+}
+
+.morz-export.bt-hr-dashed #write hr { border-top-style: dashed; }
+.morz-export.bt-hr-dotted #write hr { border-top-style: dotted; border-top-width: 2px; }
+.morz-export.bt-hr-thick #write hr {
+  border-top-width: 3px;
+  border-top-color: color-mix(in srgb, var(--bt-accent) 55%, var(--bt-border));
+  border-radius: 2px;
+}
+.morz-export.bt-hr-gradient #write hr {
+  border-top: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--bt-accent), transparent);
+}
+
+.morz-export.bt-checkbox-round #write input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.05em; height: 1.05em;
+  border: 1.5px solid color-mix(in srgb, var(--bt-accent) 45%, var(--bt-border));
+  border-radius: 50%;
+  background: var(--bt-bg);
+  display: inline-grid; place-content: center; vertical-align: -0.15em;
+}
+.morz-export.bt-checkbox-round #write input[type="checkbox"]:checked {
+  border-color: var(--bt-accent);
+  background: var(--bt-accent);
+}
+.morz-export.bt-checkbox-round #write input[type="checkbox"]:checked::after {
+  content: "✓"; color: #fff; font-size: .76em; line-height: 1; font-weight: 700;
+}
+
+.morz-export.bt-list-colorful-ul #write ul > li::marker { color: hsl(205 68% 52%); }
+.morz-export.bt-list-colorful-ul #write ul ul > li::marker { color: hsl(237 68% 52%); }
+.morz-export.bt-list-colorful-ul #write ul ul ul > li::marker { color: hsl(269 68% 52%); }
+.morz-export.bt-list-colorful-ol #write ol > li::marker { color: hsl(240 68% 52%); }
+.morz-export.bt-list-colorful-ol #write ol ol > li::marker { color: hsl(272 68% 52%); }
+.morz-export.bt-list-colorful-ol #write ol ol ol > li::marker { color: hsl(304 68% 52%); }
+
+.morz-export #write blockquote.md-alert {
+  border-radius: var(--bt-callout-radius, 0);
+  overflow: hidden;
+}
+.morz-export.bt-callout-traditional #write blockquote.md-alert {
+  background: transparent;
+  border-left: 4px solid color-mix(in srgb, var(--bt-alert-color, var(--bt-accent)) 30%, transparent);
+}
+.morz-export.bt-callout-traditional #write blockquote.md-alert > .md-alert-text-container {
+  background: color-mix(in srgb, var(--bt-alert-color, var(--bt-accent)) calc(var(--bt-alert-tint, 7%) + 8%), transparent);
+}
+.morz-export.bt-callout-border #write blockquote.md-alert {
+  background: color-mix(in srgb, var(--bt-alert-color, var(--bt-accent)) var(--bt-alert-tint, 7%), transparent);
+  border-left: 4px solid var(--bt-alert-color, var(--bt-accent));
+}
+.morz-export.bt-callout-border #write blockquote.md-alert > .md-alert-text-container {
+  background: color-mix(in srgb, var(--bt-alert-color, var(--bt-accent)) min(calc(var(--bt-alert-tint, 7%) * 3), 45%), transparent);
+}
+
+.morz-export.bt-tag-outlined #write .md-tag {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 45%, transparent);
+}
+.morz-export.bt-tag-clear #write .md-tag {
+  background: transparent;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
+/* Quote styles carried into exported HTML/PDF. The export root gets the same
+   bt-quote-* class as the live editor; a quote is one <blockquote> here. */
+.morz-export.bt-quote-default #write blockquote:not(.md-alert) {
+  background: color-mix(in srgb, var(--bt-accent) 6%, transparent);
+  border: 0;
+  border-radius: 12px;
+}
+.morz-export.bt-quote-outline #write blockquote:not(.md-alert) {
+  background: color-mix(in srgb, var(--bt-accent) 1.5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--bt-accent) 22%, var(--bt-border));
+  border-radius: 12px;
+}
+.morz-export.bt-quote-border-left #write blockquote:not(.md-alert) {
+  background: transparent;
+  border: 0;
+  border-left: 3px solid color-mix(in srgb, var(--bt-accent) 55%, transparent);
+  border-radius: 0;
+}
+.morz-export.bt-quote-bracket #write blockquote:not(.md-alert) {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid color-mix(in srgb, var(--bt-accent) 28%, var(--bt-border));
+  border-bottom: 1px solid color-mix(in srgb, var(--bt-accent) 28%, var(--bt-border));
+  border-radius: 0;
+}
+.morz-export.bt-quote-mark #write blockquote:not(.md-alert) {
+  position: relative;
+  background: transparent;
+  border-left: 0;
+  padding-left: 2.6em;
+}
+.morz-export.bt-quote-mark #write blockquote:not(.md-alert)::before {
+  content: "“";
+  position: absolute;
+  left: .35em;
+  top: -.15em;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.5em;
+  font-weight: 700;
+  line-height: 1;
+  color: color-mix(in srgb, var(--bt-accent) 48%, transparent);
+}
+
+/* macOS 12 等不支持 color-mix 的 WebKit：固定值兜底。支持 color-mix 时不会命中。 */
+@supports not (color: color-mix(in srgb, red, blue)) {
+  .morz-export.bt-quote-outline #write blockquote:not(.md-alert) {
+    border-color: rgba(70, 142, 235, 0.22);
+  }
+  .morz-export.bt-quote-border-left #write blockquote:not(.md-alert) {
+    border-left-color: rgba(70, 142, 235, 0.55);
+  }
+  .morz-export.bt-quote-bracket #write blockquote:not(.md-alert) {
+    border-top-color: rgba(70, 142, 235, 0.28);
+    border-bottom-color: rgba(70, 142, 235, 0.28);
+  }
+  .morz-export.bt-quote-mark #write blockquote:not(.md-alert)::before {
+    color: rgba(70, 142, 235, 0.48);
+  }
+  #write blockquote.md-alert {
+    background: rgba(70, 142, 235, 0.07);
+  }
+  .morz-export.bt-heading-label #write > h1::before, .morz-export.bt-heading-label #write > h2::before {
+    background: rgba(70, 142, 235, 0.12);
+  }
+  .morz-export.bt-heading-underline #write > h1, .morz-export.bt-heading-underline #write > h2 {
+    border-bottom: 1px solid rgba(70, 142, 235, 0.42);
+  }
+  .morz-export.bt-hr-thick #write hr {
+    border-top-color: var(--bt-accent);
+  }
+  .morz-export.bt-checkbox-round #write input[type="checkbox"] {
+    border: 1.5px solid var(--bt-border);
+  }
+  .morz-export.bt-callout-traditional #write blockquote.md-alert {
+    border-left: 4px solid var(--bt-alert-color, var(--bt-accent));
+  }
+  .morz-export.bt-callout-traditional #write blockquote.md-alert > .md-alert-text-container {
+    background: rgba(70, 142, 235, 0.15);
+  }
+  .morz-export.bt-callout-border #write blockquote.md-alert {
+    background: rgba(70, 142, 235, 0.07);
+  }
+  .morz-export.bt-callout-border #write blockquote.md-alert > .md-alert-text-container {
+    background: rgba(70, 142, 235, 0.21);
+  }
+  .morz-export.bt-tag-outlined #write .md-tag {
+    box-shadow: inset 0 0 0 1px rgba(70, 142, 235, 0.45);
+  }
+}

@@ -1,0 +1,1733 @@
+/* Blue Topaz for Morz — a curated adaptation of Blue Topaz.
+   The palette, heading colours and card language are inspired by Blue Topaz
+   (https://github.com/PKM-er/Blue-Topaz_Obsidian-css), MIT, by whyt-byte / PKMer.
+   Partial style(s) is(are) sourced or adapted from Blue Topaz ... thanks to
+   WhyI (https://github.com/whyt-byte) and pkmer.cn.
+
+   Customise in Settings → 自定义 CSS. The --bt-* tokens below are the stable
+   knobs; see docs/BLUE-TOPAZ.md for examples. */
+
+:root {
+  --bt-accent: #468eeb;
+  --bt-accent-strong: #2d82cc;
+  --bt-accent-soft: rgba(70, 142, 235, 0.11);
+  --bt-accent-softer: rgba(70, 142, 235, 0.055);
+  --bt-bg: #ffffff;
+  --bt-bg-soft: #f7f9fc;
+  --bt-sidebar: #f4f7fb;
+  --bt-text: #1b2430;
+  --bt-muted: #6f7c8c;
+  --bt-border: #dbe4ee;
+
+  /* Colourful folders: 12 fixed tones, chosen by the first character of the
+     folder name (digits 1–9 map to tones 1–9, matching 10-/20-/30- prefixes). */
+  --bt-folder-0: #e5534b;
+  --bt-folder-1: #e8893a;
+  --bt-folder-2: #d6a61e;
+  --bt-folder-3: #58a55c;
+  --bt-folder-4: #2e9e8f;
+  --bt-folder-5: #2f86c9;
+  --bt-folder-6: #7a6bd6;
+  --bt-folder-7: #b75bb5;
+  --bt-folder-8: #d65b83;
+  --bt-folder-9: #8a6d4b;
+  --bt-folder-10: #7f9b3a;
+  --bt-folder-11: #5f7f8f;
+
+  /* Blue Topaz's signature light heading gradient: deep navy → pale blue */
+  --bt-h1: hsl(216, 88%, 26%);
+  --bt-h2: hsl(212, 100%, 33%);
+  --bt-h3: hsl(210, 86%, 39%);
+  --bt-h4: hsl(208, 58%, 49%);
+  --bt-h5: hsl(209, 70%, 62%);
+  --bt-h6: hsl(209, 65%, 72%);
+
+  --bt-code-bg: #f6f8fb;
+  --bt-code-border: #e1e8f0;
+  --bt-code-text: #2b3440;
+  --bt-inline-bg: #eef4fb;
+  --bt-inline-color: #c05621;
+  --bt-quote-bg: rgba(70, 142, 235, 0.06);
+  --bt-quote-text: #4b5a6b;
+  --bt-table-head: rgba(70, 142, 235, 0.08);
+  --bt-table-stripe: #f7fafd;
+  --bt-mark: #fff1a8;
+  --bt-selection: rgba(70, 142, 235, 0.22);
+  --bt-radius: 8px;
+  --bt-shadow: 0 8px 22px rgba(31, 66, 112, 0.07);
+  /* Blue Topaz's own stacks: Bookerly / Inter / 霞鹜文楷 first, then safe fallbacks. */
+  --bt-font: "Bookerly", "Inter", "Segoe UI", "霞鹜文楷 GB", "LXGW WenKai", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --bt-ui-font: "Inter", "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --bt-mono: "JetBrains Mono", "Cascadia Code", "SF Mono", Consolas, "等距更纱黑体 SC", "Microsoft YaHei Mono", monospace;
+  --bt-line-height: 1.82;
+  --bt-heading-line-height: 1.32;
+  /* Writing surface. Set --bt-page-bg-image to a gradient/photo; the overlay
+     keeps text readable. */
+  --bt-page-bg: #ffffff;
+  --bt-page-bg-image: radial-gradient(1100px 460px at 50% -8%, rgba(70, 142, 235, 0.055), transparent 70%);
+  --bt-page-overlay: transparent;
+  --bt-sidebar-image: none;
+  --bt-checkbox-radius: 4px;
+
+  /* Callout accents follow Obsidian's palette; every type can be retinted. */
+  --bt-alert-note: #448aff;
+  --bt-alert-abstract: #00b0ff;
+  --bt-alert-info: #00b8d4;
+  --bt-alert-todo: #00b8d4;
+  --bt-alert-tip: #00bfa5;
+  --bt-alert-success: #00c853;
+  --bt-alert-question: #64dd17;
+  --bt-alert-warning: #ff9100;
+  --bt-alert-failure: #ff5252;
+  --bt-alert-danger: #ff1744;
+  --bt-alert-bug: #f50057;
+  --bt-alert-example: #7c4dff;
+  --bt-alert-quote: #9e9e9e;
+  --bt-alert-important: #8957e5;
+  --bt-alert-caution: #da3633;
+  --bt-alert-tint: 7%;
+
+  --bg-color: var(--bt-bg);
+  --text-color: var(--bt-text);
+  --side-bar-bg-color: var(--bt-sidebar);
+  --control-text-color: var(--bt-muted);
+  --item-hover-bg-color: var(--bt-accent-softer);
+  --active-file-bg-color: var(--bt-accent-soft);
+  --active-file-border-color: var(--bt-accent);
+  --primary-color: var(--bt-accent);
+  --select-text-bg-color: var(--bt-selection);
+  --ui-border-color: var(--bt-border);
+  --window-border: 1px solid var(--bt-border);
+
+  --text-font: var(--bt-font);
+  --write-font: var(--bt-font);
+  --ui-font: var(--bt-ui-font);
+  --write-font-size: 16px;
+  --write-line-height: var(--bt-line-height);
+  --write-max-width: 780px;
+  --write-padding-x: 40px;
+  --monospace: var(--bt-mono);
+  --page-bg-color: var(--bt-page-bg);
+
+  --link-color: var(--bt-accent-strong);
+  --tag-color: var(--bt-accent);
+  --inline-code-bg: var(--bt-inline-bg);
+  --inline-code-color: var(--bt-inline-color);
+  --code-block-bg: var(--bt-code-bg);
+  --code-block-border: var(--bt-code-border);
+  --code-block-color: var(--bt-code-text);
+  --blockquote-border: var(--bt-accent);
+  --blockquote-color: var(--bt-quote-text);
+  --hr-color: var(--bt-border);
+  --table-border-color: var(--bt-border);
+  --table-stripe-bg: var(--bt-table-stripe);
+  --table-header-bg: var(--bt-table-head);
+  --md-char-color: #93a4b8;
+  --meta-content-color: var(--bt-muted);
+  --meta-block-bg: var(--bt-bg-soft);
+  --mark-bg-color: var(--bt-mark);
+  --search-hit-bg-color: var(--bt-mark);
+  --kbd-bg: var(--bt-bg-soft);
+  --kbd-border: var(--bt-border);
+
+  --h1-color: var(--bt-h1);
+  --h2-color: var(--bt-h2);
+  --h3-color: var(--bt-h3);
+  --h4-color: var(--bt-h4);
+  --h5-color: var(--bt-h5);
+  --h6-color: var(--bt-h6);
+
+  --cm-keyword: #a626a4; --cm-number: #986801; --cm-def: #4078c0; --cm-type: #c18401;
+  --cm-property: #4078c0; --cm-operator: #0184bc; --cm-comment: #a0a1a7; --cm-string: #50a14f;
+  --cm-string-2: #0184bc; --cm-meta: #986801; --cm-builtin: #4078c0; --cm-tag: #e45649;
+  --cm-attribute: #986801; --cm-header: #e45649;
+  color-scheme: light;
+}
+
+/* Headings: Blue Topaz's blue gradient. */
+#write h1 { color: var(--bt-h1); font-size: 2.05em; font-weight: 700; line-height: 1.25; letter-spacing: -0.018em; margin: 1.2em 0 0.5em; }
+#write h2 { color: var(--bt-h2); font-size: 1.5em; font-weight: 650; line-height: 1.35; margin: 1.55em 0 0.45em; padding-bottom: 0.22em; border-bottom: 1px solid var(--bt-border); }
+#write h3 { color: var(--bt-h3); font-size: 1.22em; font-weight: 600; margin: 1.35em 0 0.35em; }
+#write h4 { color: var(--bt-h4); font-size: 1.06em; font-weight: 600; margin: 1.2em 0 0.3em; }
+#write h5 { color: var(--bt-h5); font-size: 0.98em; font-weight: 600; margin: 1.1em 0 0.25em; }
+#write h6 { color: var(--bt-h6); font-size: 0.92em; font-weight: 600; margin: 1em 0 0.2em; }
+/* The adapter inlines theme variables for its own rules (and keeps the #write
+   id in the live selector). These #write + two-class rules beat the adapted
+   rules without !important, so Settings → 自定义 CSS can retheme live. */
+#write .cm-line.md-h1 { color: var(--bt-h1); }
+#write .cm-line.md-h2 { color: var(--bt-h2); }
+#write .cm-line.md-h3 { color: var(--bt-h3); }
+#write .cm-line.md-h4 { color: var(--bt-h4); }
+#write .cm-line.md-h5 { color: var(--bt-h5); }
+#write .cm-line.md-h6 { color: var(--bt-h6); }
+#write .cm-line .md-link { color: var(--bt-accent-strong); border-bottom-color: color-mix(in srgb, var(--bt-accent) 32%, transparent); }
+#write :is(.cm-line, .md-table-wrap).md-quote { background: var(--bt-quote-bg); border-left-color: var(--bt-accent); color: var(--bt-quote-text); }
+#write .cm-line.md-quote.md-quote-first { border-radius: var(--bt-radius) var(--bt-radius) 0 0; }
+#write .cm-line.md-quote.md-quote-last { border-radius: 0 0 var(--bt-radius) var(--bt-radius); }
+#write .cm-line.md-quote.md-quote-first.md-quote-last { border-radius: var(--bt-radius); }
+#write .cm-line.md-quote:not(.md-quote-first):not(.md-quote-last) { border-radius: 0; }
+#write .cm-line .md-code { color: var(--bt-inline-color); background: var(--bt-inline-bg); }
+#write .cm-line .md-tag { color: var(--bt-accent); }
+/* 高亮颜色优先：`.md-mark-red` 等在元素上写 --mark-bg-color；
+   只有没有颜色类时才回退 BT 的主题黄。 */
+#write .cm-line .md-mark { background: var(--mark-bg-color, var(--bt-mark)); }
+
+#write p { margin: 0 0 1em; }
+#write a { color: var(--bt-accent-strong); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--bt-accent) 32%, transparent); }
+#write a:hover { border-bottom-color: var(--bt-accent); background: var(--bt-accent-softer); }
+#write strong { color: var(--bt-text); font-weight: 650; }
+#write em { color: inherit; }
+
+/* Quotes: tinted card with the topaz edge. */
+#write blockquote {
+  background: var(--bt-quote-bg);
+  border-left: 3px solid var(--bt-accent);
+  border-radius: var(--bt-radius);
+  color: var(--bt-quote-text);
+  padding: 0.2em 1em;
+}
+.md-live .md-quote {
+  background: var(--bt-quote-bg);
+  border-left-color: var(--bt-accent);
+  color: var(--bt-quote-text);
+}
+.md-live .md-quote.md-quote-first { border-radius: var(--bt-radius) var(--bt-radius) 0 0; }
+.md-live .md-quote.md-quote-last { border-radius: 0 0 var(--bt-radius) var(--bt-radius); }
+.md-live .md-quote.md-quote-first.md-quote-last { border-radius: var(--bt-radius); }
+.md-live .md-quote:not(.md-quote-first):not(.md-quote-last) { border-radius: 0; }
+
+/* Quote styles (Settings → Quotes). Callouts share .md-quote, so every style
+   excludes .md-alert. All five are built from the topaz accent, a hairline and
+   generous radii; no heavy borders or chat-bubble shapes. */
+body.bt-quote-default #write :is(.cm-line, .md-table-wrap).md-quote:not(.md-alert) {
+  background: color-mix(in srgb, var(--bt-accent) 6%, transparent);
+  border: 0;
+  border-radius: 0;
+}
+body.bt-quote-default #write .cm-line.md-quote-first:not(.md-alert) { border-radius: 12px 12px 0 0; }
+body.bt-quote-default #write .cm-line.md-quote-last:not(.md-alert) { border-radius: 0 0 12px 12px; }
+body.bt-quote-default #write .cm-line.md-quote-first.md-quote-last:not(.md-alert) { border-radius: 12px; }
+
+body.bt-quote-outline #write :is(.cm-line, .md-table-wrap).md-quote:not(.md-alert) {
+  background: color-mix(in srgb, var(--bt-accent) 1.5%, transparent);
+  border: 0 solid color-mix(in srgb, var(--bt-accent) 22%, var(--bt-border));
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-radius: 0;
+}
+body.bt-quote-outline #write .cm-line.md-quote-first:not(.md-alert) {
+  border-top-width: 1px;
+  border-radius: 12px 12px 0 0;
+}
+body.bt-quote-outline #write .cm-line.md-quote-last:not(.md-alert) {
+  border-bottom-width: 1px;
+  border-radius: 0 0 12px 12px;
+}
+body.bt-quote-outline #write .cm-line.md-quote-first.md-quote-last:not(.md-alert) {
+  border-radius: 12px;
+}
+
+body.bt-quote-border-left #write :is(.cm-line, .md-table-wrap).md-quote:not(.md-alert) {
+  background: transparent;
+  border: 0;
+  border-left: 3px solid color-mix(in srgb, var(--bt-accent) 55%, transparent);
+  border-radius: 0;
+}
+
+body.bt-quote-bracket #write :is(.cm-line, .md-table-wrap).md-quote:not(.md-alert) {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+body.bt-quote-bracket #write .cm-line.md-quote-first:not(.md-alert) {
+  border-top: 1px solid color-mix(in srgb, var(--bt-accent) 28%, var(--bt-border));
+}
+body.bt-quote-bracket #write .cm-line.md-quote-last:not(.md-alert) {
+  border-bottom: 1px solid color-mix(in srgb, var(--bt-accent) 28%, var(--bt-border));
+}
+
+body.bt-quote-mark #write .cm-line.md-quote-1:not(.md-alert) {
+  background: transparent;
+  border-left-width: 0;
+  padding-left: 2.6em;
+}
+body.bt-quote-mark #write .cm-line.md-quote-first.md-quote-1:not(.md-alert) {
+  position: relative;
+}
+body.bt-quote-mark #write .cm-line.md-quote-first.md-quote-1:not(.md-alert)::before {
+  content: "“";
+  position: absolute;
+  left: .35em;
+  top: -.15em;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.5em;
+  font-weight: 700;
+  line-height: 1;
+  color: color-mix(in srgb, var(--bt-accent) 48%, transparent);
+  pointer-events: none;
+}
+
+/* Inline code and code blocks. */
+#write code { color: var(--bt-inline-color); background: var(--bt-inline-bg); border-radius: 4px; padding: 0.08em 0.35em; }
+#write pre.md-fences { border-radius: var(--bt-radius); box-shadow: var(--bt-shadow); }
+.md-live .md-fences.md-code-first { border-top-left-radius: var(--bt-radius); border-top-right-radius: var(--bt-radius); }
+.md-live .md-fences.md-code-last { border-bottom-left-radius: var(--bt-radius); border-bottom-right-radius: var(--bt-radius); }
+.md-live .md-fences.md-code-first.md-code-last { border-radius: var(--bt-radius); }
+
+/* A topaz hairline between sections. */
+#write hr { height: 2px; border: 0; background: linear-gradient(90deg, transparent, var(--bt-accent), transparent); }
+
+/* Tables follow the same card language (export selectors; live uses variables). */
+#write table { border-collapse: separate; border-spacing: 0; border: 1px solid var(--bt-border); border-radius: var(--bt-radius); overflow: hidden; }
+#write .md-table-wrap { border-radius: var(--bt-radius); }
+/* Live preview：圆角改由滚动容器裁剪。表格自身的 overflow:hidden 对单元格背景
+   不可靠，表头方块会盖住圆角，看起来像“缺角”。 */
+.md-live #write .md-table-scroll {
+  border-radius: var(--bt-radius);
+  overflow-y: hidden;
+  box-shadow: var(--bt-shadow);
+}
+.md-live #write .md-table { border-radius: 0; }
+#write table th { background: var(--bt-table-head); border-color: var(--bt-border); font-weight: 600; }
+#write table td { border-color: var(--bt-border); }
+#write table tbody tr:nth-child(2n) { background: var(--bt-table-stripe); }
+
+#write mark { background: var(--mark-bg-color, var(--bt-mark)); border-radius: 3px; }
+#write kbd { background: var(--bt-bg-soft); border-color: var(--bt-border); }
+.md-live .md-list-bullet { color: var(--bt-accent); }
+.md-live .md-list-number { color: var(--bt-accent); font-weight: 600; }
+.md-live .md-tag { border: 1px solid color-mix(in srgb, var(--bt-accent) 20%, transparent); }
+.md-live .md-task-checkbox { accent-color: var(--bt-accent); }
+
+/* Chrome: a calm blue-tinted frame around the writing surface. */
+.titlebar { background: var(--bt-sidebar); border-bottom: 1px solid var(--bt-border); }
+.statusbar { background: var(--bt-sidebar); border-top: 1px solid var(--bt-border); color: var(--bt-muted); }
+.sidebar { background: var(--bt-sidebar); }
+
+/* Typography: Blue Topaz's airy body rhythm, with tighter headings and code. */
+/* 段落行只设上下内边距（取上游 blockquote 的节奏，取代旧的「上 0 / 下 1.05em」）。
+   不能用 padding 简写：左右会被一起重置，覆盖引用行（callout 也走 .md-quote）
+   的 padding-left: 15px，标题因此贴边、看着不垂直居中。 */
+.md-live #write .cm-line.md-p { padding-top: 0.5em; padding-bottom: 0.5em; }
+#write li { line-height: 1.78; }
+#write blockquote { line-height: 1.75; }
+#write table { line-height: 1.6; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6 {
+  line-height: var(--bt-heading-line-height);
+  letter-spacing: -0.008em;
+}
+#write h1 { letter-spacing: -0.02em; }
+#write table th, #write table td { padding: 7px 13px; }
+
+/* Writing surface: solid colour plus an optional image/gradient layer. The
+   overlay is a separate layer so a photo doesn't make body text unreadable. */
+.editor-pane {
+  background-color: var(--bt-page-bg);
+  background-image: linear-gradient(var(--bt-page-overlay), var(--bt-page-overlay)), var(--bt-page-bg-image);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.sidebar {
+  background-image: var(--bt-sidebar-image);
+  background-position: center;
+  background-size: cover;
+}
+
+/* Callout：默认沿用官方 tint 卡片；传统/边框样式由 bt-callout-style 选择后生效。 */
+body {
+  --md-alert-tint: var(--bt-alert-tint);
+  --md-alert-radius: var(--bt-callout-radius, var(--bt-radius));
+}
+/* 类型色统一走 --bt-alert-*：设置页里的 15 个颜色旋钮要能在实时预览里看到效果，
+   否则只有设置页的示意块和导出会变，用户会以为设置无效。 */
+.md-live #write :is(.cm-line, .md-table-wrap).md-alert-note { --md-alert-color: var(--bt-alert-note); }
+.md-live #write :is(.cm-line, .md-table-wrap).md-alert-abstract { --md-alert-color: var(--bt-alert-abstract); }
+.md-live #write :is(.cm-line, .md-table-wrap).md-alert-info { --md-alert-color: var(--bt-alert-info); }
+.md-live #write :is(.cm-line, .md-table-wrap).md-alert-todo { --md-alert-color: var(--bt-alert-todo); }
+.md-live #write :is(.cm-line, .md-table-wrap).md-alert-tip { --md-alert-color: var(--bt-alert-tip); }
+.md-live #write :is(.cm-line, .md-table-wrap).md-alert-success { --md-alert-color: var(--bt-alert-success); }
+.md-live #write :is(.cm-line, .md-table-wrap).md-alert-question { --md-alert-color: var(--bt-alert-question); }
+.md-live #write :is(.cm-line, .md-table-wrap).md-alert-warning { --md-alert-color: var(--bt-alert-warning); }
+.md-live #write :is(.cm-line, .md-table-wrap).md-alert-failure { --md-alert-color: var(--bt-alert-failure); }
+.md-live #write :is(.cm-line, .md-table-wrap).md-alert-danger { --md-alert-color: var(--bt-alert-danger); }
+.md-live #write :is(.cm-line, .md-table-wrap).md-alert-bug { --md-alert-color: var(--bt-alert-bug); }
+.md-live #write :is(.cm-line, .md-table-wrap).md-alert-example { --md-alert-color: var(--bt-alert-example); }
+.md-live #write :is(.cm-line, .md-table-wrap).md-alert-quote { --md-alert-color: var(--bt-alert-quote); }
+.md-live #write :is(.cm-line, .md-table-wrap).md-alert-important { --md-alert-color: var(--bt-alert-important); }
+.md-live #write :is(.cm-line, .md-table-wrap).md-alert-caution { --md-alert-color: var(--bt-alert-caution); }
+
+/* Topaz checkboxes: crisp square with a tick, instead of the OS widget. */
+/* 悬挂缩进按 checkbox 的实际占宽（1.02em + 两侧 margin）算，
+   这样 Callout/引用里的任务文字仍与正文对齐。 */
+.md-live .md-li-task { --md-marker: 1.52em; }
+.md-live .md-task-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.02em;
+  height: 1.02em;
+  margin: 0 0.42em 0 0.08em;
+  border: 1.5px solid color-mix(in srgb, var(--bt-accent) 45%, var(--bt-border));
+  border-radius: var(--bt-checkbox-radius);
+  background: var(--bt-bg);
+  display: inline-grid;
+  place-content: center;
+  vertical-align: -0.13em;
+  cursor: pointer;
+  transition: background-color .12s ease, border-color .12s ease;
+}
+.md-live .md-task-checkbox:hover { border-color: var(--bt-accent); }
+.md-live .md-task-checkbox:checked {
+  border-color: var(--bt-accent);
+  background: var(--bt-accent);
+}
+.md-live .md-task-checkbox:checked::after {
+  content: "✓";
+  color: #fff;
+  font-size: 0.76em;
+  line-height: 1;
+  font-weight: 700;
+}
+.md-live .md-task-done { color: var(--bt-muted); text-decoration-color: color-mix(in srgb, var(--bt-muted) 55%, transparent); }
+
+/* Tags as quiet topaz pills. */
+#write .md-tag, .md-live .md-tag {
+  padding: 0.05em 0.5em;
+  border-radius: 999px;
+  background: var(--bt-accent-softer);
+  border: 1px solid color-mix(in srgb, var(--bt-accent) 18%, transparent);
+}
+
+/* ================= Style Settings（主题设置） =================
+   Blue Topaz 的社区配色方案（Obsidian 版 Style Settings 里的 class-select），
+   移植为 --bt-* 覆盖。声明给 Morz 的 Style Settings 兼容层读取；这些方案
+   只重定义亮色板，暗色模式保持 Blue Topaz 原暗色。 */
+/* @settings
+name: Blue Topaz for Morz
+id: morz-blue-topaz
+settings:
+  -
+    id: bt-color-scheme
+    title: Color palette (from Topaz Community)
+    title.zh: 整体配色选择 (由Topaz社区贡献)
+    type: class-select
+    allowEmpty: false
+    default: bt-scheme-default
+    options:
+      -
+        label: Default · 蓝宝
+        value: bt-scheme-default
+      -
+        label: Simplicity 极简 (@Cuman)
+        value: bt-scheme-simplicity
+      -
+        label: Avocado 牛油果
+        value: bt-scheme-avocado
+      -
+        label: Honey milk 蜂蜜牛奶 (@LillianWho)
+        value: bt-scheme-honey-milk
+      -
+        label: 榛子巧克力 Hazelnut chocolate (@LillianWho)
+        value: bt-scheme-chocolate
+      -
+        label: Autumn 秋 (@LillianWho)
+        value: bt-scheme-autumn
+  -
+    id: bt-ui-background-heading
+    type: heading
+    title: Background
+    title.zh: 背景
+    level: 1
+  -
+    id: bt-bg-effect
+    type: class-select
+    title: Background effect
+    title.zh: 背景效果
+    allowEmpty: false
+    default: bt-bg-default
+    options:
+      -
+        label: Default wash
+        label.zh: 默认晕染
+        value: bt-bg-default
+      -
+        label: Paper texture
+        label.zh: 纸张纹理
+        value: bt-bg-paper
+      -
+        label: Dots
+        label.zh: 点阵
+        value: bt-bg-dots
+      -
+        label: Grid
+        label.zh: 网格
+        value: bt-bg-grid
+      -
+        label: Gradient
+        label.zh: 渐变
+        value: bt-bg-gradient
+      -
+        label: Plain
+        label.zh: 纯色
+        value: bt-bg-plain
+      -
+        label: Waves
+        label.zh: 波浪
+        value: bt-bg-waves
+  -
+    id: bt-wave-animate
+    type: class-toggle
+    title: Wave animation
+    title.zh: 波浪动画
+    description: The wave stays still while the system's Reduce Motion preference is on.
+    description.zh: 系统开启「减少动态效果」时，波浪会保持静止，动画可能不生效。
+    default: true
+  -
+    id: bt-ui-file-heading
+    type: heading
+    title: File list
+    title.zh: 文件列表
+    level: 1
+  -
+    id: bt-file-active-style
+    type: class-select
+    title: Active file
+    title.zh: 当前文件
+    allowEmpty: false
+    default: bt-file-active-fill
+    options:
+      -
+        label: Tinted fill
+        label.zh: 主题色块
+        value: bt-file-active-fill
+      -
+        label: Bold only
+        label.zh: 仅加粗
+        value: bt-file-active-plain
+      -
+        label: Left rule
+        label.zh: 左侧细线
+        value: bt-file-active-line
+  -
+    id: bt-file-shape
+    type: class-select
+    title: Row corners
+    title.zh: 行圆角
+    allowEmpty: false
+    default: bt-file-shape-rounded
+    options:
+      -
+        label: Square
+        label.zh: 直角
+        value: bt-file-shape-square
+      -
+        label: Rounded
+        label.zh: 圆角
+        value: bt-file-shape-rounded
+      -
+        label: Pill
+        label.zh: 胶囊
+        value: bt-file-shape-pill
+  -
+    id: bt-folder-colorful
+    type: class-toggle
+    title: Colorful folders
+    title.zh: 彩色文件夹
+    default: false
+  -
+    id: bt-folder-color-style
+    type: class-select
+    title: Colour style
+    title.zh: 彩色化类型
+    allowEmpty: false
+    default: bt-folder-style-border
+    options:
+      -
+        label: Border (left tone bar)
+        label.zh: 边框（左侧色条）
+        value: bt-folder-style-border
+      -
+        label: Tab-liked block
+        label.zh: 标签块
+        value: bt-folder-style-tab
+      -
+        label: Folder block
+        label.zh: 文件夹块
+        value: bt-folder-style-block
+  -
+    id: bt-file-card-rows
+    type: class-toggle
+    title: Card-style rows
+    title.zh: 卡片式文件行
+    default: false
+  -
+    id: bt-file-type-icons
+    type: class-toggle
+    title: File type icons
+    title.zh: 文件类型图标
+    default: false
+  -
+    id: bt-ui-folder-heading
+    type: heading
+    title: Folders
+    title.zh: 文件夹
+    level: 1
+  -
+    id: bt-folder-chevron
+    type: class-toggle
+    title: Collapse icon
+    title.zh: 折叠图标
+    default: true
+  -
+    id: bt-folder-icon-style
+    type: class-select
+    title: Folder icon
+    title.zh: 文件夹图标样式
+    allowEmpty: false
+    default: bt-folder-icon-folder
+    options:
+      -
+        label: Folder icon
+        label.zh: 文件夹图标
+        value: bt-folder-icon-folder
+      -
+        label: Collapse chevron
+        label.zh: 折叠图标
+        value: bt-folder-icon-chevron
+      -
+        label: No icon
+        label.zh: 无图标
+        value: bt-folder-icon-none
+  -
+    id: bt-folder-dot
+    type: class-toggle
+    title: Folder dot
+    title.zh: 文件夹圆点
+    default: false
+  -
+    id: bt-ui-list-heading
+    type: heading
+    title: Lists
+    title.zh: 列表
+    level: 1
+  -
+    id: bt-list-colorful-ul
+    type: class-toggle
+    title: Colorful bullets
+    title.zh: 彩色无序列表
+    default: false
+  -
+    id: bt-list-colorful-ol
+    type: class-toggle
+    title: Colorful numbers
+    title.zh: 彩色有序列表
+    default: false
+  -
+    id: bt-ui-heading-heading
+    type: heading
+    title: Headings
+    title.zh: 标题
+    level: 1
+  -
+    id: bt-heading-label
+    type: class-toggle
+    title: H1/H2 labels
+    title.zh: 标题前显示 H1/H2
+    default: false
+  -
+    id: bt-heading-underline
+    type: class-toggle
+    title: Heading underline
+    title.zh: 标题下划线
+    default: false
+  -
+    id: bt-ui-divider-heading
+    type: heading
+    title: Divider
+    title.zh: 分隔线
+    level: 1
+  -
+    id: bt-hr-style
+    type: class-select
+    title: Divider style
+    title.zh: 分割线样式
+    allowEmpty: false
+    default: bt-hr-solid
+    options:
+      -
+        label: Default
+        label.zh: 默认
+        value: bt-hr-solid
+      -
+        label: Dashed
+        label.zh: 虚线
+        value: bt-hr-dashed
+      -
+        label: Dotted
+        label.zh: 点线
+        value: bt-hr-dotted
+      -
+        label: Thick
+        label.zh: 粗线
+        value: bt-hr-thick
+      -
+        label: Gradient
+        label.zh: 渐变
+        value: bt-hr-gradient
+  -
+    id: bt-ui-checkbox-heading
+    type: heading
+    title: Checkbox
+    title.zh: 勾选框
+    level: 1
+  -
+    id: bt-checkbox-round
+    type: class-toggle
+    title: Round checkbox
+    title.zh: 圆形勾选框
+    default: false
+  -
+    id: bt-ui-callout-heading
+    type: heading
+    title: Callouts
+    title.zh: Callout
+    level: 1
+  -
+    id: bt-callout-style
+    type: class-select
+    title: Callout style
+    title.zh: Callout 样式
+    allowEmpty: false
+    default: bt-callout-default
+    options:
+      -
+        label: Default (tinted card)
+        label.zh: 默认（浅色卡片）
+        value: bt-callout-default
+      -
+        label: Traditional (flat body)
+        label.zh: 传统（正文透明）
+        value: bt-callout-traditional
+      -
+        label: Border (strong left rule)
+        label.zh: 边框（左侧粗线）
+        value: bt-callout-border
+  -
+    id: bt-alert-tint
+    type: variable-number-slider
+    title: Background tint
+    title.zh: 背景浓度
+    default: 7
+    min: 0
+    max: 20
+    step: 1
+    format: '%'
+  -
+    id: bt-callout-radius
+    type: variable-number-slider
+    title: Corner radius
+    title.zh: 圆角
+    default: 8
+    min: 0
+    max: 16
+    step: 1
+    format: px
+  -
+    id: bt-ui-quote-heading
+    type: heading
+    title: Quotes
+    title.zh: 引用框
+    level: 1
+  -
+    id: bt-quote-style
+    type: class-select
+    title: Quote style
+    title.zh: 引用框样式
+    allowEmpty: false
+    default: bt-quote-default
+    options:
+      -
+        label: Soft tint
+        label.zh: 柔和底色（默认）
+        value: bt-quote-default
+      -
+        label: Hairline
+        label.zh: 发丝描边
+        value: bt-quote-outline
+      -
+        label: Gradient rule
+        label.zh: 渐变侧线
+        value: bt-quote-border-left
+      -
+        label: Bracket
+        label.zh: 上下细线
+        value: bt-quote-bracket
+      -
+        label: Quotation mark
+        label.zh: 引号
+        value: bt-quote-mark
+  -
+    id: bt-ui-tags-heading
+    type: heading
+    title: Tags
+    title.zh: 标签
+    level: 1
+  -
+    id: bt-tag-style
+    type: class-select
+    title: Tag style
+    title.zh: 标签样式
+    allowEmpty: false
+    default: bt-tag-default
+    options:
+      -
+        label: Filled
+        label.zh: 实心
+        value: bt-tag-default
+      -
+        label: Outlined
+        label.zh: 描边
+        value: bt-tag-outlined
+      -
+        label: Clear
+        label.zh: 无底色
+        value: bt-tag-clear
+*/
+
+/* Simplicity 极简（@Cuman）：近黑正文 + 冷白纸面，灰蓝点缀。 */
+:is(body, .morz-export).bt-scheme-simplicity:not(.theme-dark) {
+  --bt-accent: hsl(220, 20%, 35%);
+  --bt-accent-strong: hsl(220, 20%, 27%);
+  --bt-accent-soft: color-mix(in srgb, var(--bt-accent) 9%, transparent);
+  --bt-accent-softer: color-mix(in srgb, var(--bt-accent) 4.5%, transparent);
+  --bt-bg: hsl(204, 45%, 97%);
+  --bt-bg-soft: hsl(210, 45%, 95%);
+  --bt-sidebar: hsl(204, 40%, 96%);
+  --bt-text: hsl(0, 0%, 13%);
+  --bt-muted: hsl(218, 19%, 39%);
+  --bt-border: hsl(207, 17%, 90%);
+  --bt-h1: hsl(0, 0%, 13%);
+  --bt-h2: hsl(220, 20%, 30%);
+  --bt-h3: hsl(220, 18%, 34%);
+  --bt-h4: hsl(220, 16%, 38%);
+  --bt-h5: hsl(220, 14%, 42%);
+  --bt-h6: hsl(220, 12%, 46%);
+  --bt-inline-bg: hsl(210, 45%, 95%);
+  --bt-inline-color: hsl(220, 20%, 35%);
+  --bt-quote-bg: color-mix(in srgb, var(--bt-accent) 4%, transparent);
+  --bt-quote-text: hsl(218, 19%, 39%);
+  --bt-table-head: color-mix(in srgb, var(--bt-accent) 6%, transparent);
+  --bt-table-stripe: hsl(204, 40%, 96%);
+  --bt-mark: hsl(210, 20%, 88%);
+  --bt-selection: color-mix(in srgb, var(--bt-accent) 20%, transparent);
+  --bt-code-bg: hsl(204, 40%, 96%);
+  --bt-code-border: hsl(207, 17%, 90%);
+  --bt-code-text: hsl(0, 0%, 16%);
+  --bt-page-bg: hsl(204, 45%, 97%);
+  --bt-page-bg-image: none;
+}
+
+/* Avocado 牛油果：绿系 accent + 淡绿纸面（上游 theme.css:6413）。 */
+:is(body, .morz-export).bt-scheme-avocado:not(.theme-dark) {
+  --bt-accent: hsl(143, 34%, 45%);
+  --bt-accent-strong: hsl(143, 38%, 38%);
+  --bt-accent-soft: color-mix(in srgb, var(--bt-accent) 11%, transparent);
+  --bt-accent-softer: color-mix(in srgb, var(--bt-accent) 5.5%, transparent);
+  --bt-bg: #ffffff;
+  --bt-bg-soft: #e8f0e8;
+  --bt-sidebar: #fcfcfc;
+  --bt-text: #1f2a23;
+  --bt-muted: #5d6f63;
+  --bt-border: #dfe7e0;
+  --bt-h1: hsl(143, 45%, 24%);
+  --bt-h2: hsl(143, 42%, 30%);
+  --bt-h3: hsl(143, 38%, 36%);
+  --bt-h4: hsl(143, 34%, 42%);
+  --bt-h5: hsl(143, 32%, 48%);
+  --bt-h6: hsl(143, 30%, 55%);
+  --bt-inline-bg: #eaf3ec;
+  --bt-inline-color: #08804d;
+  --bt-quote-bg: rgba(143, 34%, 45%, 0.05);
+  --bt-quote-text: #4c5f53;
+  --bt-table-head: color-mix(in srgb, var(--bt-accent) 8%, transparent);
+  --bt-table-stripe: #f5faf6;
+  --bt-mark: #e6f3b8;
+  --bt-selection: rgba(127, 191, 254, 0.35);
+  --bt-code-bg: #f3f8f4;
+  --bt-code-border: #dde9e0;
+  --bt-code-text: #243328;
+  --bt-page-bg: #ffffff;
+  --bt-page-bg-image: radial-gradient(1100px 460px at 50% -8%, color-mix(in srgb, var(--bt-accent) 6%, transparent), transparent 70%);
+}
+
+/* Honey milk 蜂蜜牛奶（上游 theme.css:7931）：暖金 accent + 奶油纸面。 */
+:is(body, .morz-export).bt-scheme-honey-milk:not(.theme-dark) {
+  --bt-accent: hsl(41, 88%, 54%);
+  --bt-accent-strong: hsl(41, 80%, 44%);
+  --bt-accent-soft: color-mix(in srgb, var(--bt-accent) 14%, transparent);
+  --bt-accent-softer: color-mix(in srgb, var(--bt-accent) 7%, transparent);
+  --bt-bg: #f8f8f5;
+  --bt-bg-soft: #f0ede0;
+  --bt-sidebar: #f8f8f5;
+  --bt-text: #3d3529;
+  --bt-muted: #8d8471;
+  --bt-border: #e3ded0;
+  --bt-h1: hsl(38, 62%, 33%);
+  --bt-h2: hsl(39, 66%, 38%);
+  --bt-h3: hsl(40, 70%, 43%);
+  --bt-h4: hsl(41, 74%, 47%);
+  --bt-h5: hsl(42, 78%, 51%);
+  --bt-h6: hsl(43, 80%, 55%);
+  --bt-inline-bg: #f5efdd;
+  --bt-inline-color: #a3700a;
+  --bt-quote-bg: color-mix(in srgb, var(--bt-accent) 7%, transparent);
+  --bt-quote-text: #6b6252;
+  --bt-table-head: color-mix(in srgb, var(--bt-accent) 10%, transparent);
+  --bt-table-stripe: #faf8f0;
+  --bt-mark: hsl(34, 100%, 80%);
+  --bt-selection: rgba(102, 187, 170, 0.35);
+  --bt-code-bg: #f6f2e7;
+  --bt-code-border: #e5dfcb;
+  --bt-code-text: #4a4232;
+  --bt-page-bg: #f8f8f5;
+  --bt-page-bg-image: radial-gradient(1100px 460px at 50% -8%, color-mix(in srgb, var(--bt-accent) 8%, transparent), transparent 70%);
+}
+
+/* 榛子巧克力 Hazelnut chocolate（上游 theme.css:8245）：暖棕 accent + 米色纸面。 */
+:is(body, .morz-export).bt-scheme-chocolate:not(.theme-dark) {
+  --bt-accent: hsl(17, 44%, 32%);
+  --bt-accent-strong: hsl(17, 40%, 26%);
+  --bt-accent-soft: color-mix(in srgb, var(--bt-accent) 12%, transparent);
+  --bt-accent-softer: color-mix(in srgb, var(--bt-accent) 6%, transparent);
+  --bt-bg: #faf4eb;
+  --bt-bg-soft: #f7e6ce;
+  --bt-sidebar: #faf4eb;
+  --bt-text: #3d2b20;
+  --bt-muted: #8d7a6a;
+  --bt-border: #e8dcc9;
+  --bt-h1: hsl(17, 48%, 24%);
+  --bt-h2: hsl(17, 46%, 30%);
+  --bt-h3: hsl(17, 44%, 36%);
+  --bt-h4: hsl(22, 42%, 42%);
+  --bt-h5: hsl(27, 40%, 48%);
+  --bt-h6: hsl(32, 38%, 54%);
+  --bt-inline-bg: #f5e9d8;
+  --bt-inline-color: #a0522d;
+  --bt-quote-bg: color-mix(in srgb, var(--bt-accent) 6%, transparent);
+  --bt-quote-text: #6b594b;
+  --bt-table-head: color-mix(in srgb, var(--bt-accent) 8%, transparent);
+  --bt-table-stripe: #fbf6ee;
+  --bt-mark: #f3dcb8;
+  --bt-selection: rgba(175, 125, 107, 0.28);
+  --bt-code-bg: #f6efe4;
+  --bt-code-border: #e7dbc8;
+  --bt-code-text: #453325;
+  --bt-page-bg: #faf4eb;
+  --bt-page-bg-image: radial-gradient(1100px 460px at 50% -8%, color-mix(in srgb, var(--bt-accent) 6%, transparent), transparent 70%);
+}
+
+/* Autumn 秋（上游 theme.css:8590）：橄榄绿 accent + 米绿纸面。 */
+:is(body, .morz-export).bt-scheme-autumn:not(.theme-dark) {
+  --bt-accent: hsl(80, 100%, 33%);
+  --bt-accent-strong: hsl(80, 85%, 27%);
+  --bt-accent-soft: color-mix(in srgb, var(--bt-accent) 11%, transparent);
+  --bt-accent-softer: color-mix(in srgb, var(--bt-accent) 5.5%, transparent);
+  --bt-bg: #fafaf3;
+  --bt-bg-soft: #eef3e3;
+  --bt-sidebar: #fafaf3;
+  --bt-text: #2f3a2f;
+  --bt-muted: #6f7d64;
+  --bt-border: #e2e6d4;
+  --bt-h1: hsl(205, 30%, 27%);
+  --bt-h2: hsl(95, 40%, 30%);
+  --bt-h3: hsl(80, 55%, 33%);
+  --bt-h4: hsl(80, 65%, 37%);
+  --bt-h5: hsl(80, 72%, 42%);
+  --bt-h6: hsl(80, 70%, 48%);
+  --bt-inline-bg: #f1f4e4;
+  --bt-inline-color: #007562;
+  --bt-quote-bg: color-mix(in srgb, var(--bt-accent) 5%, transparent);
+  --bt-quote-text: #5d6a52;
+  --bt-table-head: color-mix(in srgb, var(--bt-accent) 8%, transparent);
+  --bt-table-stripe: #f6f8ec;
+  --bt-mark: #edf0b8;
+  --bt-selection: rgba(187, 221, 205, 0.5);
+  --bt-code-bg: #f4f6ea;
+  --bt-code-border: #e3e7d2;
+  --bt-code-text: #33402f;
+  --bt-page-bg: #fafaf3;
+  --bt-page-bg-image: radial-gradient(1100px 460px at 50% -8%, color-mix(in srgb, var(--bt-accent) 6%, transparent), transparent 70%);
+}
+
+/* Dark palette variants. 之前这些配色只在亮色下生效，系统暗色/夜间切配色会
+   看起来“没反应”。这里用每套配色的 accent 派生暗色表面、文字和标题阶梯，
+   保持 Blue Topaz 的深色底，同时让切换能看出来。Default 仍用原暗色板。 */
+:is(body, .morz-export).theme-dark.bt-scheme-simplicity { --bt-scheme-accent: #aeb8c7; }
+:is(body, .morz-export).theme-dark.bt-scheme-avocado { --bt-scheme-accent: #5fb97b; }
+:is(body, .morz-export).theme-dark.bt-scheme-honey-milk { --bt-scheme-accent: #e0a45f; }
+:is(body, .morz-export).theme-dark.bt-scheme-chocolate { --bt-scheme-accent: #c98a6b; }
+:is(body, .morz-export).theme-dark.bt-scheme-autumn { --bt-scheme-accent: #aac45f; }
+
+:is(body, .morz-export).theme-dark:is(.bt-scheme-simplicity, .bt-scheme-avocado, .bt-scheme-honey-milk, .bt-scheme-chocolate, .bt-scheme-autumn) {
+  --bt-accent: var(--bt-scheme-accent);
+  --bt-accent-strong: color-mix(in srgb, var(--bt-scheme-accent) 68%, #ffffff);
+  --bt-accent-soft: color-mix(in srgb, var(--bt-scheme-accent) 18%, transparent);
+  --bt-accent-softer: color-mix(in srgb, var(--bt-scheme-accent) 9%, transparent);
+  --bt-bg: color-mix(in srgb, var(--bt-scheme-accent) 4%, #1c1c1c);
+  --bt-bg-soft: color-mix(in srgb, var(--bt-scheme-accent) 6%, #171717);
+  --bt-sidebar: color-mix(in srgb, var(--bt-scheme-accent) 3%, #121212);
+  --bt-text: color-mix(in srgb, var(--bt-scheme-accent) 6%, #cfcfcf);
+  --bt-muted: color-mix(in srgb, var(--bt-scheme-accent) 10%, #8f8f8f);
+  --bt-border: color-mix(in srgb, var(--bt-scheme-accent) 14%, #343434);
+  --bt-h1: color-mix(in srgb, var(--bt-scheme-accent) 72%, #ffffff);
+  --bt-h2: color-mix(in srgb, var(--bt-scheme-accent) 62%, #ffffff);
+  --bt-h3: color-mix(in srgb, var(--bt-scheme-accent) 52%, #ffffff);
+  --bt-h4: color-mix(in srgb, var(--bt-scheme-accent) 45%, #ffffff);
+  --bt-h5: color-mix(in srgb, var(--bt-scheme-accent) 38%, #ffffff);
+  --bt-h6: color-mix(in srgb, var(--bt-scheme-accent) 32%, #ffffff);
+  --bt-code-bg: color-mix(in srgb, var(--bt-scheme-accent) 4%, #141414);
+  --bt-code-border: color-mix(in srgb, var(--bt-scheme-accent) 12%, #343434);
+  --bt-code-text: #d6d6d6;
+  --bt-inline-bg: color-mix(in srgb, var(--bt-scheme-accent) 8%, #2b2b2b);
+  --bt-inline-color: var(--bt-accent-strong);
+  --bt-quote-bg: color-mix(in srgb, var(--bt-scheme-accent) 8%, transparent);
+  --bt-quote-text: color-mix(in srgb, var(--bt-scheme-accent) 8%, #a8b3bf);
+  --bt-table-head: color-mix(in srgb, var(--bt-scheme-accent) 12%, transparent);
+  --bt-table-stripe: color-mix(in srgb, var(--bt-scheme-accent) 4%, #262626);
+  --bt-mark: color-mix(in srgb, var(--bt-scheme-accent) 30%, #5c5a3a);
+  --bt-selection: color-mix(in srgb, var(--bt-scheme-accent) 28%, transparent);
+  --bt-page-bg: var(--bt-bg);
+  --bt-page-bg-image: radial-gradient(1100px 460px at 50% -8%, color-mix(in srgb, var(--bt-scheme-accent) 9%, transparent), transparent 70%);
+}
+
+/* ================= Interface details（文件列表 / 标签 / Callout 变体） =================
+   上游这些选项改的是 Obsidian 的 workspace/leaf/callout DOM；Morz 的结构不同，
+   这里用 Morz 自己的 .file-tree / .md-tag / .md-alert 类重写，只保留用户看得见
+   的效果。设置由 @settings 里的 class / variable 写入 body。 */
+
+/* 文件列表：当前文件用主题色块，hover 用更浅的主题色。
+   行高由虚拟列表固定，所以只改颜色/圆角，不碰 padding / 行高。 */
+body { --bt-file-radius: 8px; }
+body.bt-file-shape-square { --bt-file-radius: 0px; }
+body.bt-file-shape-rounded { --bt-file-radius: 8px; }
+body.bt-file-shape-pill { --bt-file-radius: 999px; }
+
+#morz .file-tree .tree-row { border-radius: var(--bt-file-radius); }
+#morz .file-tree .tree-row:hover { background: var(--bt-accent-softer); }
+#morz .file-tree .tree-row.active {
+  background: var(--bt-accent-soft);
+  color: var(--bt-text);
+}
+#morz .file-tree .tree-row.active:hover {
+  background: color-mix(in srgb, var(--bt-accent) 16%, transparent);
+}
+/* 圆角/胶囊：背景画到内缩的伪元素上，避免色块顶满整行、胶囊两端贴边。
+   卡片式（card-rows）已有自己的 ::before，排除；只加粗/细线模式也不画块。 */
+body:not(.bt-file-card-rows):is(.bt-file-shape-rounded, .bt-file-shape-pill) #morz .file-tree .tree-row {
+  background: transparent !important;
+}
+body:not(.bt-file-card-rows):is(.bt-file-shape-rounded, .bt-file-shape-pill) #morz .file-tree .tree-row::before {
+  content: ""; position: absolute; z-index: 0; inset: 2px 4px;
+  border-radius: var(--bt-file-radius); background: transparent; pointer-events: none;
+}
+body.bt-file-shape-pill:not(.bt-file-card-rows) #morz .file-tree .tree-row::before { inset: 3px 6px; }
+body:not(.bt-file-card-rows):is(.bt-file-shape-rounded, .bt-file-shape-pill) #morz .file-tree .tree-row:hover::before { background: var(--bt-accent-softer); }
+body:not(.bt-file-card-rows):is(.bt-file-shape-rounded, .bt-file-shape-pill) #morz .file-tree .tree-row.active::before { background: var(--bt-accent-soft); }
+body:not(.bt-file-card-rows):is(.bt-file-shape-rounded, .bt-file-shape-pill) #morz .file-tree .tree-row.active:hover::before { background: color-mix(in srgb, var(--bt-accent) 16%, transparent); }
+body.bt-file-active-plain:not(.bt-file-card-rows):is(.bt-file-shape-rounded, .bt-file-shape-pill) #morz .file-tree .tree-row.active::before,
+body.bt-file-active-line:not(.bt-file-card-rows):is(.bt-file-shape-rounded, .bt-file-shape-pill) #morz .file-tree .tree-row.active::before { background: transparent; }
+body.bt-file-active-plain #morz .file-tree .tree-row.active {
+  background: transparent;
+  color: var(--bt-text);
+  font-weight: 600;
+}
+body.bt-file-active-line #morz .file-tree .tree-row.active {
+  background: transparent;
+  color: var(--bt-text);
+  font-weight: 600;
+}
+/* 细线贴着文件内容的缩进，而不是整行的最左边缘（否则会落在侧栏外沿）。 */
+body.bt-file-active-line #morz .file-tree .tree-row.active::after {
+  content: ""; position: absolute; z-index: 1; top: 4px; bottom: 4px;
+  left: calc(var(--tree-indent, 8px) - 6px);
+  width: 3px; border-radius: 2px;
+  background: var(--bt-accent); pointer-events: none;
+}
+/* 卡片式行：用伪元素在固定行高内缩进 2px，不动虚拟列表的 27px 行高。 */
+body.bt-file-card-rows #morz .file-tree .tree-row { background: transparent !important; }
+body.bt-file-card-rows #morz .file-tree .tree-row::before {
+  content: ""; position: absolute; inset: 2px 1px; z-index: 0;
+  border-radius: var(--bt-file-radius);
+  background: color-mix(in srgb, var(--bt-text) 2.5%, transparent);
+  pointer-events: none;
+}
+body.bt-file-card-rows #morz .file-tree .tree-row:hover::before {
+  background: var(--bt-accent-softer);
+}
+body.bt-file-card-rows #morz .file-tree .tree-row.active::before {
+  background: var(--bt-accent-soft);
+}
+body.bt-file-card-rows #morz .file-tree .tree-row > * { position: relative; z-index: 1; }
+
+/* 文件类型图标：默认保留旧行为（只有图片/PDF 有图标），开关打开后 Markdown、
+   代码、音视频、数据文件和压缩包也显示各自图标；槽位宽度不变，名字不位移。 */
+#morz .file-tree .tree-file-slot {
+  display: inline-flex; flex: none; width: 15px; align-items: center; justify-content: center;
+}
+#morz .file-tree .tree-file-icon { display: none; flex: none; }
+#morz .file-tree .tree-file-icon.is-attachment { display: inline-flex; }
+#morz .file-tree .tree-file-icon.is-attachment + .tree-icon-spacer { display: none; }
+body.bt-file-type-icons #morz .file-tree .tree-file-icon { display: inline-flex; }
+body.bt-file-type-icons #morz .file-tree .tree-file-icon + .tree-icon-spacer { display: none; }
+body.bt-file-type-icons #morz .file-tree .tree-file-icon[data-file-kind="note"] { color: var(--bt-accent); }
+body.bt-file-type-icons #morz .file-tree .tree-file-icon[data-file-kind="image"] { color: #4f9b68; }
+body.bt-file-type-icons #morz .file-tree .tree-file-icon[data-file-kind="pdf"] { color: #d05b5b; }
+body.bt-file-type-icons #morz .file-tree .tree-file-icon[data-file-kind="audio"] { color: #a77ad8; }
+body.bt-file-type-icons #morz .file-tree .tree-file-icon[data-file-kind="video"] { color: #d98a3a; }
+body.bt-file-type-icons #morz .file-tree .tree-file-icon[data-file-kind="code"] { color: #4b9fd5; }
+body.bt-file-type-icons #morz .file-tree .tree-file-icon[data-file-kind="data"] { color: #43a39a; }
+body.bt-file-type-icons #morz .file-tree .tree-file-icon[data-file-kind="archive"] { color: #b08a5a; }
+
+/* 彩色文件夹：按名称首字符取色，左侧色条画在缩进处；文件名跟着着色。 */
+body.bt-folder-colorful #morz .file-tree .tree-dir {
+  --bt-folder-here: var(--bt-folder-0);
+  /* 色条贴在行最左缘，和文件夹图标/名称一起构成“彩色文件夹”的块。 */
+  box-shadow: inset 3px 0 0 var(--bt-folder-here);
+}
+body.bt-folder-colorful #morz .file-tree .tree-dir[data-folder-tone="1"] { --bt-folder-here: var(--bt-folder-1); }
+body.bt-folder-colorful #morz .file-tree .tree-dir[data-folder-tone="2"] { --bt-folder-here: var(--bt-folder-2); }
+body.bt-folder-colorful #morz .file-tree .tree-dir[data-folder-tone="3"] { --bt-folder-here: var(--bt-folder-3); }
+body.bt-folder-colorful #morz .file-tree .tree-dir[data-folder-tone="4"] { --bt-folder-here: var(--bt-folder-4); }
+body.bt-folder-colorful #morz .file-tree .tree-dir[data-folder-tone="5"] { --bt-folder-here: var(--bt-folder-5); }
+body.bt-folder-colorful #morz .file-tree .tree-dir[data-folder-tone="6"] { --bt-folder-here: var(--bt-folder-6); }
+body.bt-folder-colorful #morz .file-tree .tree-dir[data-folder-tone="7"] { --bt-folder-here: var(--bt-folder-7); }
+body.bt-folder-colorful #morz .file-tree .tree-dir[data-folder-tone="8"] { --bt-folder-here: var(--bt-folder-8); }
+body.bt-folder-colorful #morz .file-tree .tree-dir[data-folder-tone="9"] { --bt-folder-here: var(--bt-folder-9); }
+body.bt-folder-colorful #morz .file-tree .tree-dir[data-folder-tone="10"] { --bt-folder-here: var(--bt-folder-10); }
+body.bt-folder-colorful #morz .file-tree .tree-dir[data-folder-tone="11"] { --bt-folder-here: var(--bt-folder-11); }
+body.bt-folder-colorful #morz .file-tree .tree-dir .tree-name {
+  color: color-mix(in srgb, var(--bt-folder-here) 78%, var(--bt-text));
+  font-weight: 600;
+}
+body.bt-folder-colorful #morz .file-tree .tree-dir > .icon {
+  color: var(--bt-folder-here);
+  opacity: .85;
+}
+body.bt-folder-colorful #morz .file-tree .tree-dir:hover {
+  background: color-mix(in srgb, var(--bt-folder-here) 12%, transparent);
+}
+body.bt-folder-colorful #morz .file-tree .tree-dir.selected {
+  background: color-mix(in srgb, var(--bt-folder-here) 16%, transparent);
+}
+
+/* 标签：描边 / 去底色。形状仍由基础 .md-tag 的 pill 决定。 */
+body.bt-tag-outlined #write .md-tag {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 45%, transparent);
+}
+body.bt-tag-clear #write .md-tag {
+  background: transparent;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Callout 变体：默认圆角由 --md-alert-radius 统一处理，这里只保留传统/边框两种。 */
+/* 传统：正文透明，只有标题行着色；左侧保留一条淡色引导线。 */
+body.bt-callout-traditional #write :is(.cm-line, .md-table-wrap).md-alert {
+  background: transparent;
+  border-left-width: 4px;
+  border-left-color: color-mix(in srgb, var(--md-alert-color) 30%, transparent);
+}
+body.bt-callout-traditional #write .cm-line.md-alert.md-quote-first {
+  background: color-mix(in srgb, var(--md-alert-color) calc(var(--bt-alert-tint, 7%) + 8%), transparent);
+}
+
+/* 边框：标题/正文分层更深，左侧实色粗线，圆角收紧。 */
+body.bt-callout-border #write :is(.cm-line, .md-table-wrap).md-alert {
+  background: color-mix(in srgb, var(--md-alert-color) var(--bt-alert-tint, 7%), transparent);
+  border-left-width: 4px;
+  border-left-color: var(--md-alert-color);
+}
+body.bt-callout-border #write .cm-line.md-alert.md-quote-first {
+  background: color-mix(in srgb, var(--md-alert-color) min(calc(var(--bt-alert-tint, 7%) * 3), 45%), transparent);
+}
+
+/* 主题设置页的实时预览：文件行 / Callout / 标签跟随设置类即时变化。 */
+.prefs-theme-preview { border-color: var(--bt-border); background: var(--bt-bg); color: var(--bt-text); }
+.prefs-theme-preview-side { background: var(--bt-sidebar); border-right-color: var(--bt-border); }
+.prefs-theme-preview-side-title { color: var(--bt-muted); opacity: 1; }
+.prefs-theme-preview-file { border-radius: var(--bt-file-radius); }
+.prefs-theme-preview-file.is-active { background: var(--bt-accent-soft); color: var(--bt-text); }
+body.bt-file-active-plain .prefs-theme-preview-file.is-active,
+body.bt-file-active-line .prefs-theme-preview-file.is-active {
+  background: transparent;
+  font-weight: 600;
+}
+body.bt-file-active-line .prefs-theme-preview-file.is-active {
+  box-shadow: inset 3px 0 0 var(--bt-accent);
+}
+body.bt-file-card-rows .prefs-theme-preview-file { margin: 2px 0; }
+body.bt-file-card-rows .prefs-theme-preview-file:not(.is-active) {
+  background: color-mix(in srgb, var(--bt-text) 3%, transparent);
+}
+body.bt-folder-colorful .prefs-theme-preview-file.is-folder {
+  color: color-mix(in srgb, var(--bt-folder-1) 78%, var(--bt-text));
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 var(--bt-folder-1);
+}
+.prefs-theme-preview-title { color: var(--bt-h1); }
+.prefs-theme-preview-link { color: var(--bt-accent-strong); }
+.prefs-theme-preview-text code { background: var(--bt-inline-bg); color: var(--bt-inline-color); }
+.prefs-theme-preview-tag { color: var(--bt-accent); }
+body.bt-tag-outlined .prefs-theme-preview-tag {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--bt-accent) 45%, transparent);
+}
+body.bt-tag-clear .prefs-theme-preview-tag { background: transparent; padding-left: 0; padding-right: 0; }
+.prefs-theme-preview-alert { border-radius: var(--bt-callout-radius, var(--bt-radius)); }
+body.bt-callout-traditional .prefs-theme-preview-alert {
+  border-left: 4px solid color-mix(in srgb, var(--bt-alert-note) 30%, transparent);
+}
+body.bt-callout-traditional .prefs-theme-preview-alert-title {
+  background: color-mix(in srgb, var(--bt-alert-note) calc(var(--bt-alert-tint, 7%) + 8%), transparent);
+}
+body.bt-callout-traditional .prefs-theme-preview-alert-body { background: transparent; }
+body.bt-callout-border .prefs-theme-preview-alert {
+  border-left: 4px solid var(--bt-alert-note);
+}
+body.bt-callout-border .prefs-theme-preview-alert-title {
+  background: color-mix(in srgb, var(--bt-alert-note) min(calc(var(--bt-alert-tint, 7%) * 3), 45%), transparent);
+}
+
+/* 主题设置里的引用框预览：跟随「引用框样式」的五个选项。 */
+.prefs-theme-preview-quote {
+  border-left: 0;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--bt-accent) 6%, transparent);
+  color: var(--bt-quote-text);
+}
+body.bt-quote-outline .prefs-theme-preview-quote {
+  background: color-mix(in srgb, var(--bt-accent) 1.5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--bt-accent) 22%, var(--bt-border));
+  border-left-width: 1px;
+}
+body.bt-quote-border-left .prefs-theme-preview-quote {
+  background: transparent;
+  border: 0;
+  border-left: 3px solid color-mix(in srgb, var(--bt-accent) 55%, transparent);
+  border-radius: 0;
+}
+body.bt-quote-bracket .prefs-theme-preview-quote {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid color-mix(in srgb, var(--bt-accent) 28%, var(--bt-border));
+  border-bottom: 1px solid color-mix(in srgb, var(--bt-accent) 28%, var(--bt-border));
+  border-radius: 0;
+}
+body.bt-quote-mark .prefs-theme-preview-quote {
+  position: relative;
+  background: transparent;
+  border-left: 0;
+  padding-left: 2.2em;
+}
+body.bt-quote-mark .prefs-theme-preview-quote::before {
+  content: "“";
+  position: absolute;
+  left: .3em;
+  top: -.12em;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.9em;
+  font-weight: 700;
+  line-height: 1;
+  color: color-mix(in srgb, var(--bt-accent) 48%, transparent);
+}
+
+/* ================= 文件夹细节 / 列表 / 标题 / 中文版式 / 分割线 / 勾选框 =================
+   全部只改颜色、伪元素和背景，不改虚拟列表行高与文档内容。 */
+
+/* 彩色文件夹的两种形态：左侧色条（border）或整行标签块（tab-liked）。
+   标签块用 ::before 在固定行高内上下各留 2px，形成块之间的呼吸位，不改变虚拟列表几何。 */
+body.bt-folder-colorful.bt-folder-style-tab #morz .file-tree .tree-dir {
+  background: transparent !important;
+  box-shadow: none;
+}
+body.bt-folder-colorful.bt-folder-style-tab #morz .file-tree .tree-dir::before {
+  content: ""; position: absolute; z-index: 0; top: 2px; bottom: 2px; left: 0; right: 0;
+  border-radius: var(--bt-file-radius);
+  background: color-mix(in srgb, var(--bt-folder-here) 10%, transparent);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--bt-folder-here) 26%, transparent),
+    inset 3px 0 0 var(--bt-folder-here);
+  pointer-events: none;
+}
+body.bt-folder-colorful.bt-folder-style-tab #morz .file-tree .tree-dir:hover::before {
+  background: color-mix(in srgb, var(--bt-folder-here) 16%, transparent);
+}
+body.bt-folder-colorful.bt-folder-style-tab #morz .file-tree .tree-dir.selected::before {
+  background: color-mix(in srgb, var(--bt-folder-here) 16%, transparent);
+}
+body.bt-folder-colorful.bt-folder-style-tab #morz .file-tree .tree-dir > * {
+  position: relative; z-index: 1;
+}
+/* 第三种：文件夹块。整行浅色填充 + 圆角，不加左侧色条/描边，和行圆角设置搭配。 */
+body.bt-folder-colorful.bt-folder-style-block #morz .file-tree .tree-dir {
+  background: transparent !important;
+  box-shadow: none;
+}
+body.bt-folder-colorful.bt-folder-style-block #morz .file-tree .tree-dir::before {
+  content: ""; position: absolute; z-index: 0; inset: 2px 1px !important;
+  border-radius: var(--bt-file-radius);
+  background: color-mix(in srgb, var(--bt-folder-here) 13%, transparent) !important;
+  pointer-events: none;
+}
+body.bt-folder-colorful.bt-folder-style-block #morz .file-tree .tree-dir:hover::before {
+  background: color-mix(in srgb, var(--bt-folder-here) 19%, transparent) !important;
+}
+body.bt-folder-colorful.bt-folder-style-block #morz .file-tree .tree-dir.selected::before {
+  background: color-mix(in srgb, var(--bt-folder-here) 20%, transparent) !important;
+}
+body.bt-folder-colorful.bt-folder-style-block #morz .file-tree .tree-dir > * {
+  position: relative; z-index: 1;
+}
+/* 文件夹图标：用折叠箭头、文件夹轮廓，或都不显示。 */
+body.bt-folder-icon-chevron #morz .file-tree .tree-dir > .icon,
+body.bt-folder-icon-none #morz .file-tree .tree-dir > .icon { display: none; }
+body.bt-folder-icon-chevron #morz .file-tree .tree-dir .tree-twisty { opacity: .75; }
+body.bt-folder-icon-none #morz .file-tree .tree-dir .tree-twisty { opacity: .5; }
+
+/* 文件夹圆点：放在行尾（在 ⋯ 按钮左侧），像参考图一样用色点标色。 */
+body.bt-folder-dot #morz .file-tree .tree-dir::after {
+  content: ""; position: absolute; z-index: 1;
+  right: 28px; top: 50%; width: 7px; height: 7px;
+  margin-top: -3.5px; border-radius: 50%;
+  background: var(--bt-folder-here, var(--bt-accent));
+  pointer-events: none;
+}
+body:not(.bt-folder-chevron) #morz .file-tree .tree-dir .tree-twisty { visibility: hidden; }
+
+/* 列表：标记按层级取色；有序/无序各用一条色相。 */
+body.bt-list-colorful-ul .md-live .md-list-bullet {
+  color: color-mix(in srgb, hsl(calc(205 + var(--md-list-depth, 0) * 32) 68% 52%) 80%, var(--bt-text));
+}
+body.bt-list-colorful-ol .md-live .md-list-number {
+  color: color-mix(in srgb, hsl(calc(240 + var(--md-list-depth, 0) * 32) 68% 52%) 80%, var(--bt-text));
+}
+
+/* 标题：可选 H1/H2 角标和下划线；光标所在标题保持源码，不重复贴角标。 */
+body.bt-heading-label #write .cm-line.md-h1:not(.md-heading-active)::before,
+body.bt-heading-label #write .cm-line.md-h2:not(.md-heading-active)::before {
+  display: inline-block; margin-right: .45em; padding: .06em .42em;
+  border-radius: 4px; font-family: var(--bt-ui-font); font-size: 10px;
+  font-weight: 700; letter-spacing: .03em; vertical-align: .55em;
+  color: var(--bt-accent-strong);
+  background: color-mix(in srgb, var(--bt-accent) 12%, transparent);
+}
+body.bt-heading-label #write .cm-line.md-h1:not(.md-heading-active)::before { content: "H1"; }
+body.bt-heading-label #write .cm-line.md-h2:not(.md-heading-active)::before { content: "H2"; }
+body.bt-heading-underline #write .cm-line.md-h1,
+body.bt-heading-underline #write .cm-line.md-h2 {
+  background-image: linear-gradient(to right, color-mix(in srgb, var(--bt-accent) 42%, transparent), transparent 88%);
+  background-repeat: no-repeat; background-position: 0 100%; background-size: 100% 1px;
+}
+
+/* 分割线。 */
+body.bt-hr-dashed #write .md-hr-widget { border-top-style: dashed; }
+body.bt-hr-dotted #write .md-hr-widget { border-top-style: dotted; border-top-width: 2px; }
+body.bt-hr-thick #write .md-hr-widget {
+  border-top-width: 3px;
+  border-top-color: color-mix(in srgb, var(--bt-accent) 55%, var(--bt-border));
+  border-radius: 2px;
+}
+body.bt-hr-gradient #write .md-hr-widget {
+  border-top: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--bt-accent), transparent);
+}
+
+/* 圆形勾选框。 */
+body.bt-checkbox-round .md-live .md-task-checkbox { border-radius: 50%; }
+
+/* 预览同步文件夹/列表/标题/缩进设置。 */
+body.bt-folder-colorful.bt-folder-style-tab .prefs-theme-preview-file.is-folder {
+  margin: 2px 0;
+  background: color-mix(in srgb, var(--bt-folder-1) 10%, transparent);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--bt-folder-1) 26%, transparent),
+    inset 3px 0 0 var(--bt-folder-1);
+}
+body.bt-folder-colorful.bt-folder-style-block .prefs-theme-preview-file.is-folder {
+  margin: 2px 0;
+  border-radius: var(--bt-file-radius);
+  background: color-mix(in srgb, var(--bt-folder-1) 13%, transparent);
+}
+body:not(.bt-folder-chevron) .prefs-theme-preview-chevron { visibility: hidden; }
+.prefs-theme-preview-folder-icon { margin-right: 4px; opacity: .75; vertical-align: -2px; }
+body.bt-folder-icon-chevron .prefs-theme-preview-folder-icon,
+body.bt-folder-icon-none .prefs-theme-preview-folder-icon { display: none; }
+.prefs-theme-preview-file.is-folder { position: relative; padding-right: 16px; }
+body.bt-folder-dot .prefs-theme-preview-file.is-folder::after {
+  content: ""; position: absolute; right: 7px; top: 50%; width: 7px; height: 7px;
+  margin-top: -3.5px; border-radius: 50%;
+  background: var(--bt-folder-here, var(--bt-accent));
+}
+body.bt-folder-colorful.bt-folder-dot .prefs-theme-preview-file.is-folder::after {
+  background: var(--bt-folder-1);
+}
+body.bt-list-colorful-ul .prefs-theme-preview-ul {
+  color: color-mix(in srgb, hsl(205 68% 52%) 80%, var(--bt-text));
+}
+body.bt-list-colorful-ol .prefs-theme-preview-ol {
+  color: color-mix(in srgb, hsl(237 68% 52%) 80%, var(--bt-text));
+}
+body.bt-heading-label .prefs-theme-preview-title::before {
+  content: "H1"; display: inline-block; margin-right: .45em; padding: .06em .42em;
+  border-radius: 4px; font-family: var(--bt-ui-font); font-size: 10px;
+  font-weight: 700; letter-spacing: .03em; vertical-align: .55em;
+  color: var(--bt-accent-strong);
+  background: color-mix(in srgb, var(--bt-accent) 12%, transparent);
+}
+body.bt-heading-underline .prefs-theme-preview-title {
+  background-image: linear-gradient(to right, color-mix(in srgb, var(--bt-accent) 42%, transparent), transparent 88%);
+  background-repeat: no-repeat; background-position: 0 100%; background-size: 100% 1px;
+}
+/* ================= 背景效果 =================
+   只在写作区上叠 CSS 渐变/点阵/网格，不涉及背景图片、透明面板或导出。
+   索引卡主题的“纸板”质感就是两层很淡的径向斑，这里复刻成可选效果。
+   纹理保持轻微：亮色用 8% 文字色，暗色用 30% 黑（比底色更暗，而不是发亮）。 */
+body { --bt-bg-pattern-ink: color-mix(in srgb, var(--bt-text) 8%, transparent); }
+body.theme-dark { --bt-bg-pattern-ink: color-mix(in srgb, #000 30%, transparent); }
+/* 暗色下纹理的“单元格底色”固定取侧栏面板色；网格线再用更暗的 pattern ink，
+   两者才是有层次的“侧栏底 + 轻微网格”，而不是整块都和线一个颜色。 */
+body.theme-dark:is(.bt-bg-grid, .bt-bg-dots, .bt-bg-paper, .bt-bg-gradient, .bt-bg-plain) .editor-pane {
+  background-color: var(--bt-sidebar);
+}
+body.bt-bg-paper .editor-pane {
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, .02) 0 40%, transparent 41%),
+    radial-gradient(circle at 78% 70%, rgba(0, 0, 0, .01) 0 35%, transparent 36%),
+    linear-gradient(var(--bt-page-overlay), var(--bt-page-overlay)),
+    var(--bt-page-bg-image);
+  background-size: 520px 520px, 480px 480px, auto, cover;
+  background-position: 0 0, 0 0, center, center;
+  background-repeat: repeat, repeat, no-repeat, no-repeat;
+}
+body.theme-dark.bt-bg-paper .editor-pane {
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, .008) 0 40%, transparent 41%),
+    radial-gradient(circle at 78% 70%, rgba(0, 0, 0, .06) 0 35%, transparent 36%),
+    linear-gradient(var(--bt-page-overlay), var(--bt-page-overlay)),
+    var(--bt-page-bg-image);
+}
+body.bt-bg-dots .editor-pane {
+  background-image:
+    radial-gradient(circle, var(--bt-bg-pattern-ink) 1px, transparent 1.5px),
+    linear-gradient(var(--bt-page-overlay), var(--bt-page-overlay)),
+    var(--bt-page-bg-image);
+  background-size: 18px 18px, auto, cover;
+  background-position: 0 0, center, center;
+  background-repeat: repeat, no-repeat, no-repeat;
+}
+body.bt-bg-grid .editor-pane {
+  background-image:
+    linear-gradient(var(--bt-bg-pattern-ink) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bt-bg-pattern-ink) 1px, transparent 1px),
+    linear-gradient(var(--bt-page-overlay), var(--bt-page-overlay)),
+    var(--bt-page-bg-image);
+  background-size: 24px 24px, 24px 24px, auto, cover;
+  background-position: 0 0, 0 0, center, center;
+  background-repeat: repeat, repeat, no-repeat, no-repeat;
+}
+body.bt-bg-gradient .editor-pane {
+  background-image:
+    linear-gradient(135deg, color-mix(in srgb, var(--bt-accent) 5%, transparent), transparent 48%, color-mix(in srgb, var(--bt-accent) 2.5%, transparent)),
+    linear-gradient(var(--bt-page-overlay), var(--bt-page-overlay)),
+    var(--bt-page-bg-image);
+  background-size: cover, auto, cover;
+  background-position: center, center, center;
+}
+body.bt-bg-plain .editor-pane {
+  background-image: linear-gradient(var(--bt-page-overlay), var(--bt-page-overlay));
+  background-size: auto;
+}
+
+/* 预览页也带一点同样的纹理，改背景效果时能立刻看到。 */
+body.bt-bg-paper .prefs-theme-preview-page {
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, .02) 0 40%, transparent 41%),
+    radial-gradient(circle at 78% 70%, rgba(0, 0, 0, .01) 0 35%, transparent 36%);
+  background-size: 160px 160px, 140px 140px;
+}
+body.theme-dark.bt-bg-paper .prefs-theme-preview-page {
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, .008) 0 40%, transparent 41%),
+    radial-gradient(circle at 78% 70%, rgba(0, 0, 0, .06) 0 35%, transparent 36%);
+}
+body.bt-bg-dots .prefs-theme-preview-page {
+  background-image: radial-gradient(circle, var(--bt-bg-pattern-ink) 1px, transparent 1.5px);
+  background-size: 12px 12px;
+}
+body.bt-bg-grid .prefs-theme-preview-page {
+  background-image:
+    linear-gradient(var(--bt-bg-pattern-ink) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bt-bg-pattern-ink) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+body.bt-bg-gradient .prefs-theme-preview-page {
+  background-image: linear-gradient(135deg, color-mix(in srgb, var(--bt-accent) 5%, transparent), transparent 48%, color-mix(in srgb, var(--bt-accent) 2.5%, transparent));
+}
+
+/* Blue Topaz 底部波浪：单层平滑波形（1200px 无缝循环），蓝→青渐变很淡，
+   上半段渐隐；放在 ::before 的负层里，文字/工具栏仍在波之上。
+   只有选择波浪背景时才显示「波浪动画」开关（其余背景效果下没有意义）。 */
+body:not(.bt-bg-waves) .pref-row[data-setting="bt-wave-animate"],
+body:not(.bt-bg-waves) .prefs-motion-note { display: none; }
+body.bt-bg-waves .app { position: relative; isolation: isolate; }
+body.bt-bg-waves .app::before {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 140px;
+  z-index: -1; pointer-events: none;
+  background-image:
+    linear-gradient(180deg, rgba(76, 132, 255, 0) 18%, rgba(76, 132, 255, .08) 100%),
+    linear-gradient(90deg, rgba(76, 132, 255, .11), rgba(56, 208, 194, .09));
+  -webkit-mask-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,72C75,40,225,40,300,72C375,104,525,104,600,72C675,40,825,40,900,72C975,104,1125,104,1200,72L1200,120L0,120Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,72C75,40,225,40,300,72C375,104,525,104,600,72C675,40,825,40,900,72C975,104,1125,104,1200,72L1200,120L0,120Z'/%3E%3C/svg%3E");
+  -webkit-mask-repeat: repeat-x; mask-repeat: repeat-x;
+  -webkit-mask-size: 1200px 100%; mask-size: 1200px 100%;
+  -webkit-mask-position: 0 bottom; mask-position: 0 bottom;
+  mask-mode: alpha;
+  will-change: mask-position;
+}
+/* 暗色稍微深一点，浅色更淡。 */
+body.theme-light.bt-bg-waves .app::before {
+  background-image:
+    linear-gradient(180deg, rgba(76, 132, 255, 0) 18%, rgba(76, 132, 255, .07) 100%),
+    linear-gradient(90deg, rgba(76, 132, 255, .10), rgba(56, 208, 194, .08));
+}
+body.bt-bg-waves.bt-wave-animate .app::before {
+  animation: bt-wave-drift 72s linear infinite;
+}
+@keyframes bt-wave-drift {
+  from { -webkit-mask-position: 0 bottom; mask-position: 0 bottom; }
+  to { -webkit-mask-position: -1200px bottom; mask-position: -1200px bottom; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.bt-bg-waves.bt-wave-animate .app::before { animation: none; }
+}
+
+/* 波浪是全局窗口背景：让左/右侧栏、写作区和状态栏都透出下面的 body 底与波浪。 */
+body.bt-bg-waves .sidebar,
+body.bt-bg-waves .right-panel,
+body.bt-bg-waves .editor-pane,
+body.bt-bg-waves .statusbar {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+
+/* macOS 12 等不支持 color-mix 的 WebKit：固定值兜底。支持 color-mix 时不会命中。 */
+@supports not (color: color-mix(in srgb, red, blue)) {
+  body.bt-quote-outline #write :is(.cm-line, .md-table-wrap).md-quote:not(.md-alert) {
+    border-color: rgba(70, 142, 235, 0.22);
+  }
+  body.bt-quote-border-left #write :is(.cm-line, .md-table-wrap).md-quote:not(.md-alert) {
+    border-left-color: rgba(70, 142, 235, 0.55);
+  }
+  body.bt-quote-bracket #write :is(.cm-line, .md-table-wrap).md-quote:not(.md-alert) {
+    border-top-color: rgba(70, 142, 235, 0.28);
+    border-bottom-color: rgba(70, 142, 235, 0.28);
+  }
+  body.bt-quote-mark #write .cm-line.md-quote-first.md-quote-1:not(.md-alert)::before {
+    color: rgba(70, 142, 235, 0.48);
+  }
+  #write .cm-line .md-link {
+    border-bottom-color: rgba(70, 142, 235, 0.32);
+  }
+  #write a {
+    border-bottom: 1px solid rgba(94, 234, 212, 0.35);
+  }
+  .md-live .md-tag {
+    border: 1px solid rgba(70, 142, 235, 0.20);
+  }
+  #write :is(.cm-line, .md-table-wrap).md-alert {
+    background: rgba(70, 142, 235, 0.07);
+  }
+  #write .cm-line.md-alert.md-quote-first {
+    background: rgba(70, 142, 235, 0.12);
+  }
+  #write .md-table-wrap.md-alert {
+    background: rgba(70, 142, 235, 0.07);
+  }
+  .md-live .md-task-checkbox {
+    border: 1.5px solid var(--bt-border);
+  }
+  .md-live .md-task-done {
+    text-decoration-color: var(--bt-muted);
+  }
+  #write .md-tag, .md-live .md-tag {
+    border: 1px solid rgba(70, 142, 235, 0.18);
+  }
+  :is(body, .morz-export).bt-scheme-simplicity:not(.theme-dark) {
+    --bt-accent-soft: rgba(71, 83, 107, 0.09);
+    --bt-accent-softer: rgba(71, 83, 107, 0.045);
+    --bt-quote-bg: rgba(71, 83, 107, 0.04);
+    --bt-table-head: rgba(71, 83, 107, 0.06);
+    --bt-selection: rgba(71, 83, 107, 0.20);
+  }
+  :is(body, .morz-export).bt-scheme-avocado:not(.theme-dark) {
+    --bt-accent-soft: rgba(76, 154, 106, 0.11);
+    --bt-accent-softer: rgba(76, 154, 106, 0.055);
+    --bt-table-head: rgba(76, 154, 106, 0.08);
+    --bt-page-bg-image: radial-gradient(1100px 460px at 50% -8%, rgba(76, 154, 106, 0.06), transparent 70%);
+  }
+  :is(body, .morz-export).bt-scheme-honey-milk:not(.theme-dark) {
+    --bt-accent-soft: rgba(241, 176, 34, 0.14);
+    --bt-accent-softer: rgba(241, 176, 34, 0.07);
+    --bt-quote-bg: rgba(241, 176, 34, 0.07);
+    --bt-table-head: rgba(241, 176, 34, 0.10);
+    --bt-page-bg-image: radial-gradient(1100px 460px at 50% -8%, rgba(241, 176, 34, 0.08), transparent 70%);
+  }
+  :is(body, .morz-export).bt-scheme-chocolate:not(.theme-dark) {
+    --bt-accent-soft: rgba(118, 97, 46, 0.12);
+    --bt-accent-softer: rgba(118, 97, 46, 0.06);
+    --bt-quote-bg: rgba(118, 97, 46, 0.06);
+    --bt-table-head: rgba(118, 97, 46, 0.08);
+    --bt-page-bg-image: radial-gradient(1100px 460px at 50% -8%, rgba(118, 97, 46, 0.06), transparent 70%);
+  }
+  :is(body, .morz-export).bt-scheme-autumn:not(.theme-dark) {
+    --bt-accent-soft: rgba(112, 168, 0, 0.11);
+    --bt-accent-softer: rgba(112, 168, 0, 0.055);
+    --bt-quote-bg: rgba(112, 168, 0, 0.05);
+    --bt-table-head: rgba(112, 168, 0, 0.08);
+    --bt-page-bg-image: radial-gradient(1100px 460px at 50% -8%, rgba(112, 168, 0, 0.06), transparent 70%);
+  }
+  :is(body, .morz-export).theme-dark:is(.bt-scheme-simplicity, .bt-scheme-avocado, .bt-scheme-honey-milk, .bt-scheme-chocolate, .bt-scheme-autumn) {
+    --bt-accent-strong: #d6d6d6;
+    --bt-accent-soft: rgba(174, 184, 199, 0.18);
+    --bt-accent-softer: rgba(174, 184, 199, 0.09);
+    --bt-bg: #1c1c1c;
+    --bt-bg-soft: #171717;
+    --bt-sidebar: #121212;
+    --bt-text: #cfcfcf;
+    --bt-muted: #8f8f8f;
+    --bt-border: #343434;
+    --bt-h1: #ffffff;
+    --bt-h2: #e8e8e8;
+    --bt-h3: #dcdcdc;
+    --bt-h4: #d0d0d0;
+    --bt-h5: #c4c4c4;
+    --bt-h6: #b8b8b8;
+    --bt-code-bg: #141414;
+    --bt-code-border: #343434;
+    --bt-inline-bg: #2b2b2b;
+    --bt-quote-bg: rgba(174, 184, 199, 0.08);
+    --bt-quote-text: #a8b3bf;
+    --bt-table-head: rgba(174, 184, 199, 0.12);
+    --bt-table-stripe: #262626;
+    --bt-mark: #5c5a3a;
+    --bt-selection: rgba(174, 184, 199, 0.28);
+    --bt-page-bg-image: none;
+  }
+  #morz .file-tree .tree-row.active:hover {
+    background: rgba(70, 142, 235, 0.16);
+  }
+  body.bt-file-card-rows #morz .file-tree .tree-row::before {
+    background: rgba(27, 36, 48, 0.03);
+  }
+  body.bt-folder-colorful #morz .file-tree .tree-dir .tree-name {
+    color: var(--bt-text);
+  }
+  body.bt-folder-colorful #morz .file-tree .tree-dir:hover {
+    background: rgba(70, 142, 235, 0.12);
+  }
+  body.bt-folder-colorful #morz .file-tree .tree-dir.selected {
+    background: rgba(70, 142, 235, 0.16);
+  }
+  body.bt-tag-outlined #write .md-tag {
+    box-shadow: inset 0 0 0 1px rgba(70, 142, 235, 0.45);
+  }
+  body.bt-callout-traditional #write :is(.cm-line, .md-table-wrap).md-alert {
+    border-left-color: var(--bt-alert-color);
+  }
+  body.bt-callout-traditional #write .cm-line.md-alert.md-quote-first {
+    background: rgba(70, 142, 235, 0.15);
+  }
+  body.bt-callout-border #write :is(.cm-line, .md-table-wrap).md-alert {
+    background: rgba(70, 142, 235, 0.07);
+  }
+  body.bt-callout-border #write .cm-line.md-alert.md-quote-first {
+    background: rgba(70, 142, 235, 0.21);
+  }
+  body.bt-file-card-rows .prefs-theme-preview-file:not(.is-active) {
+    background: rgba(27, 36, 48, 0.03);
+  }
+  body.bt-folder-colorful .prefs-theme-preview-file.is-folder {
+    color: var(--bt-text);
+  }
+  body.bt-tag-outlined .prefs-theme-preview-tag {
+    box-shadow: inset 0 0 0 1px rgba(70, 142, 235, 0.45);
+  }
+  body.bt-callout-traditional .prefs-theme-preview-alert {
+    border-left: 4px solid rgba(70, 142, 235, 0.30);
+  }
+  body.bt-callout-traditional .prefs-theme-preview-alert-title {
+    background: rgba(70, 142, 235, 0.15);
+  }
+  body.bt-callout-border .prefs-theme-preview-alert-title {
+    background: rgba(70, 142, 235, 0.21);
+  }
+  body.bt-folder-colorful.bt-folder-style-tab #morz .file-tree .tree-dir::before {
+    background: rgba(70, 142, 235, 0.10);
+    box-shadow: inset 0 0 0 1px rgba(70, 142, 235, 0.26),
+    inset 3px 0 0 var(--bt-folder-here);
+  }
+  body.bt-folder-colorful.bt-folder-style-tab #morz .file-tree .tree-dir:hover::before {
+    background: rgba(70, 142, 235, 0.16);
+  }
+  body.bt-folder-colorful.bt-folder-style-tab #morz .file-tree .tree-dir.selected::before {
+    background: rgba(70, 142, 235, 0.16);
+  }
+  body.bt-list-colorful-ul .md-live .md-list-bullet {
+    color: hsl(205 68% 52%);
+  }
+  body.bt-list-colorful-ol .md-live .md-list-number {
+    color: hsl(240 68% 52%);
+  }
+  body.bt-heading-label #write .cm-line.md-h1:not(.md-heading-active)::before, body.bt-heading-label #write .cm-line.md-h2:not(.md-heading-active)::before {
+    background: rgba(70, 142, 235, 0.12);
+  }
+  body.bt-heading-underline #write .cm-line.md-h1, body.bt-heading-underline #write .cm-line.md-h2 {
+    background-image: linear-gradient(to right, rgba(70, 142, 235, 0.42), transparent 88%);
+  }
+  body.bt-hr-thick #write .md-hr-widget {
+    border-top-color: var(--bt-accent);
+  }
+  body.bt-folder-colorful.bt-folder-style-tab .prefs-theme-preview-file.is-folder {
+    background: rgba(70, 142, 235, 0.10);
+    box-shadow: inset 0 0 0 1px rgba(70, 142, 235, 0.26),
+    inset 3px 0 0 var(--bt-folder-1);
+  }
+  body.bt-list-colorful-ul .prefs-theme-preview-ul {
+    color: hsl(205 68% 52%);
+  }
+  body.bt-list-colorful-ol .prefs-theme-preview-ol {
+    color: hsl(237 68% 52%);
+  }
+  body.bt-heading-label .prefs-theme-preview-title::before {
+    background: rgba(70, 142, 235, 0.12);
+  }
+  body.bt-heading-underline .prefs-theme-preview-title {
+    background-image: linear-gradient(to right, rgba(70, 142, 235, 0.42), transparent 88%);
+  }
+  body {
+    --bt-bg-pattern-ink: rgba(27, 36, 48, 0.08);
+  }
+  body.theme-dark {
+    --bt-bg-pattern-ink: rgba(0, 0, 0, 0.30);
+  }
+  body.bt-bg-gradient .editor-pane {
+    background-image: linear-gradient(135deg, rgba(70, 142, 235, 0.05), transparent 48%, rgba(70, 142, 235, 0.025)),
+    linear-gradient(var(--bt-page-overlay), var(--bt-page-overlay)),
+    var(--bt-page-bg-image);
+  }
+  body.bt-bg-gradient .prefs-theme-preview-page {
+    background-image: linear-gradient(135deg, rgba(70, 142, 235, 0.05), transparent 48%, rgba(70, 142, 235, 0.025));
+  }
+}
